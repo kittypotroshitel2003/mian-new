@@ -3,3 +3,8 @@ node_modules/
 .next/cache/
 node_modules/
 .next/
+node_modules
+dist
+.env
+deploy.config.json
+out/

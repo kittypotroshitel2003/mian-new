@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { constructionMeta } from '../../../lib/seo-data';
 import ConstructionDetail from '../../../components/pages/ConstructionDetail';
 
+export const dynamic = 'force-static';
+
 type Props = { params: Promise<{ id: string }> };
 
 export async function generateStaticParams() {
@@ -30,4 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default ConstructionDetail;
+export default function Page() {
+  return <ConstructionDetail />;
+}
