@@ -144,14 +144,14 @@ function GoalSelector() {
           key={opt.label}
           type="button"
           onClick={() => setSelected(opt.label)}
-          className={`flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border-2 transition-all ${
+          className={`flex flex-col items-center gap-1 py-2.5 px-1 rounded-xl border-2 transition-all ${
             selected === opt.label
               ? "border-[#0066FF] bg-blue-50 text-[#0066FF]"
               : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
           }`}
         >
-          <span className="text-xl">{opt.icon}</span>
-          <span className="text-xs font-medium">{opt.label}</span>
+          <span className="text-lg">{opt.icon}</span>
+          <span className="text-[10px] sm:text-xs font-medium leading-tight text-center">{opt.label}</span>
         </button>
       ))}
     </div>
@@ -434,13 +434,13 @@ export default function Home() {
         {/* Slider Controls */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-4 rounded-2xl transition-all z-20 group"
+          className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-4 rounded-2xl transition-all z-20 group"
         >
           <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-4 rounded-2xl transition-all z-20 group"
+          className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white p-4 rounded-2xl transition-all z-20 group"
         >
           <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
         </button>
@@ -479,10 +479,10 @@ export default function Home() {
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   className="text-center group"
                 >
-                  <div className="font-bold bg-gradient-to-r from-[#0066FF] to-[#00D9FF] bg-clip-text text-transparent mb-2 text-[72px]">
+                  <div className="font-bold bg-gradient-to-r from-[#0066FF] to-[#00D9FF] bg-clip-text text-transparent mb-2 text-[40px] md:text-[72px]">
                     {stat.value}
                   </div>
-                  <div className="text-gray-600 font-medium text-[24px]">{stat.label}</div>
+                  <div className="text-gray-600 font-medium text-[14px] md:text-[24px]">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -772,26 +772,28 @@ export default function Home() {
               </div>
 
               {/* BOTTOM: manager card */}
-              <div className="relative z-10 flex items-center gap-5 bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mt-8">
-                <div className="relative flex-shrink-0">
+              <div className="relative z-10 flex items-stretch gap-4 bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-5 mt-8">
+                <div className="relative flex-shrink-0 self-start">
                   <ImageWithFallback
                     src="https://images.unsplash.com/photo-1770199105692-9e52ff137cad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjByZWFsJTIwZXN0YXRlJTIwYWdlbnQlMjB3b21hbiUyMHNtaWxpbmd8ZW58MXx8fHwxNzcyNjI5MzEyfDA&ixlib=rb-4.1.0&q=80&w=1080"
                     alt="Менеджер МИАН"
-                    className="w-20 h-20 rounded-2xl object-cover"
+                    className="w-16 h-16 rounded-xl object-cover"
                   />
-                  <span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-400 rounded-full border-2 border-[#080f1f]" />
+                  <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-[#080f1f]" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-bold text-lg">Анна Соколова</p>
-                  <p className="text-white/60 text-sm mt-0.5">Старший менеджер · 7 лет опыта</p>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <a href="tel:+74951234567" className="w-10 h-10 bg-[#0066FF] hover:bg-[#0052CC] rounded-xl flex items-center justify-center transition-colors">
-                    <Phone className="w-5 h-5 text-white" />
-                  </a>
-                  <a href="#" className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors">
-                    <MessageSquare className="w-5 h-5 text-white" />
-                  </a>
+                <div className="flex-1 min-w-0 flex flex-col justify-between">
+                  <div>
+                    <p className="text-white font-bold text-base leading-tight">Анна Соколова</p>
+                    <p className="text-white/60 text-xs mt-1 leading-snug">Старший менеджер · 7 лет опыта</p>
+                  </div>
+                  <div className="flex gap-2 mt-3">
+                    <a href="tel:+74951234567" className="flex-1 h-9 bg-[#0066FF] hover:bg-[#0052CC] rounded-xl flex items-center justify-center transition-colors">
+                      <Phone className="w-4 h-4 text-white" />
+                    </a>
+                    <a href="#" className="flex-1 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors">
+                      <MessageSquare className="w-4 h-4 text-white" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,10 +1,10 @@
 node_modules/
 .next/
 .next/cache/
-node_modules/
-.next/
 node_modules
 dist
 .env
+_env
 deploy.config.json
 out/
+tsconfig.tsbuildinfo
