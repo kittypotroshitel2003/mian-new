@@ -92,6 +92,7 @@ const faqs = [
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<string[]>([]);
   const [formData, setFormData] = useState({ name: "", email: "", question: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "success">("idle");
 
   const toggleItem = (id: string) =>
     setOpenItems((prev) =>
@@ -100,21 +101,23 @@ export default function FAQ() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Ваш вопрос отправлен! Мы свяжемся с вами в ближайшее время.");
+    // TODO: подключить backend (Telegram Bot / email-сервис)
+    // Пока форма не отправляет данные — показываем честное сообщение
+    setFormStatus("success");
     setFormData({ name: "", email: "", question: "" });
   };
 
   const totalQuestions = faqs.reduce((sum, cat) => sum + cat.questions.length, 0);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-white min-h-screen">
 
       <PageHeader
         breadcrumbs={[{ label: "Главная", to: "/" }, { label: "Вопросы и ответы" }]}
         title="Частые вопросы"
         subtitle="Ответы на самые популярные вопросы о покупке недвижимости и работе с нашей компанией"
         badge={
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-[#0066FF] rounded-full text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#363E62]/10 text-[#363E62] rounded-full text-sm font-medium">
             <HelpCircle className="w-4 h-4" />
             {totalQuestions} вопросов и ответов
           </div>
@@ -132,15 +135,15 @@ export default function FAQ() {
                 key={catIdx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -40px 0px" }}
                 transition={{ delay: catIdx * 0.05 }}
               >
                 {/* Заголовок категории */}
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 bg-blue-50 rounded-2xl flex items-center justify-center text-xl">
+                  <div className="w-10 h-10 bg-[#363E62]/10 rounded-2xl flex items-center justify-center text-xl">
                     {category.icon}
                   </div>
-                  <h2 className="text-2xl font-bold text-gray-900">{category.category}</h2>
+                  <h2 className="text-2xl font-bold text-[#363E62]">{category.category}</h2>
                   <span className="ml-2 px-2.5 py-0.5 bg-gray-100 text-gray-500 rounded-full text-sm font-medium">
                     {category.questions.length}
                   </span>
@@ -156,29 +159,29 @@ export default function FAQ() {
                       <div
                         key={itemIdx}
                         className={`bg-white rounded-2xl shadow-sm border transition-all ${
-                          isOpen ? "border-[#0066FF]/20 shadow-md" : "border-gray-100 hover:border-gray-200"
+                          isOpen ? "border-[#363E62]/20 shadow-md" : "border-gray-100 hover:border-gray-200"
                         }`}
                       >
                         <button
                           onClick={() => toggleItem(itemId)}
                           className="w-full px-6 py-5 flex items-center justify-between text-left"
                         >
-                          <span className={`font-semibold transition-colors ${isOpen ? "text-[#0066FF]" : "text-gray-900"}`}>
+                          <span className={`font-semibold transition-colors ${isOpen ? "text-[#363E62]" : "text-[#363E62]"}`}>
                             {item.question}
                           </span>
                           <ChevronDown
                             className={`w-5 h-5 flex-shrink-0 ml-4 transition-all ${
-                              isOpen ? "rotate-180 text-[#0066FF]" : "text-gray-400"
+                              isOpen ? "rotate-180 text-[#363E62]" : "text-gray-400"
                             }`}
                           />
                         </button>
-                        <AnimatePresence>
+                        <AnimatePresence initial={false}>
                           {isOpen && (
                             <motion.div
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                              transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
                               className="overflow-hidden"
                             >
                               <div className="px-6 pb-5 pt-0 text-gray-600 leading-relaxed border-t border-gray-100">
@@ -199,13 +202,13 @@ export default function FAQ() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden shadow-2xl"
           >
             {/* Левая панель */}
-            <div className="lg:col-span-2 bg-gradient-to-br from-[#0066FF] to-[#0052CC] p-10 flex flex-col justify-between relative overflow-hidden">
+            <div className="lg:col-span-2 bg-gradient-to-br from-[#363E62] to-[#232840] p-10 flex flex-col justify-between relative overflow-hidden">
               <div className="absolute -top-16 -left-16 w-56 h-56 bg-white/10 rounded-full blur-2xl" />
-              <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-[#00D9FF]/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-[#363E62]/20 rounded-full blur-2xl" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/15 rounded-2xl flex items-center justify-center mb-8">
                   <MessageSquare className="w-7 h-7 text-white" />
@@ -219,15 +222,15 @@ export default function FAQ() {
               </div>
               <div className="relative z-10 mt-10 space-y-3">
                 <div className="flex items-center gap-3 text-white/80 text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#363E62] flex-shrink-0" />
                   Ответ в течение рабочего дня
                 </div>
                 <div className="flex items-center gap-3 text-white/80 text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#363E62] flex-shrink-0" />
                   Консультация бесплатна
                 </div>
                 <div className="flex items-center gap-3 text-white/80 text-sm">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#363E62] flex-shrink-0" />
                   Без навязчивых звонков
                 </div>
               </div>
@@ -235,52 +238,91 @@ export default function FAQ() {
 
             {/* Форма */}
             <div className="lg:col-span-3 bg-white p-10">
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">Задайте вопрос</h3>
-              <p className="text-gray-500 mb-7">Опишите ситуацию — разберёмся вместе</p>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Ваше имя *</label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Иван Иванов"
-                      required
-                      className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300"
-                    />
+              {formStatus === "success" ? (
+                <div className="flex flex-col items-center justify-center h-full min-h-[260px] text-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-[#363E62]/10 flex items-center justify-center">
+                    <Send className="w-6 h-6 text-[#363E62]" />
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Email *</label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="example@mail.ru"
-                      required
-                      className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300"
-                    />
-                  </div>
+                  <h3 className="text-xl font-bold text-[#363E62]">Вопрос принят</h3>
+                  <p className="text-gray-500 max-w-sm leading-relaxed">
+                    Автоматическая отправка пока не подключена. Позвоните нам напрямую — ответим на все вопросы.
+                  </p>
+                  <a
+                    href="tel:+79001234567"
+                    className="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    <Phone className="w-4 h-4" />
+                    +7 (900) 123-45-67
+                  </a>
+                  <button
+                    onClick={() => setFormStatus("idle")}
+                    className="text-sm text-gray-400 hover:text-[#363E62] transition-colors"
+                  >
+                    Заполнить снова
+                  </button>
                 </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Ваш вопрос *</label>
-                  <textarea
-                    value={formData.question}
-                    onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                    rows={5}
-                    placeholder="Опишите ваш вопрос подробно..."
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-300"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-100 hover:shadow-blue-200 hover:scale-[1.01] transition-all flex items-center justify-center gap-2"
-                >
-                  <Send className="w-5 h-5" />
-                  Отправить вопрос
-                </button>
-              </form>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold text-[#363E62] mb-1">Задайте вопрос</h3>
+                  <p className="text-gray-500 mb-7">Опишите ситуацию — разберёмся вместе</p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Ваше имя *</label>
+                        <input
+                          type="text"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          placeholder="Иван Иванов"
+                          required
+                          className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Email *</label>
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="example@mail.ru"
+                          required
+                          className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Ваш вопрос *</label>
+                      <textarea
+                        value={formData.question}
+                        onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                        rows={5}
+                        placeholder="Опишите ваш вопрос подробно..."
+                        required
+                        className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-300"
+                      />
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="faq-privacy"
+                        required
+                        className="mt-0.5 w-4 h-4 accent-[#363E62] cursor-pointer"
+                      />
+                      <label htmlFor="faq-privacy" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
+                        Я согласен(а) с{" "}
+                        <a href="/privacy" className="text-[#363E62] hover:underline">политикой конфиденциальности</a>
+                      </label>
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-[#363E62]/15 hover:shadow-[#363E62]/20 hover:opacity-90 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Send className="w-5 h-5" />
+                      Отправить вопрос
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </motion.div>
 
@@ -288,22 +330,22 @@ export default function FAQ() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="mt-8 bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col md:flex-row items-center justify-between gap-6"
           >
             <div className="flex items-center gap-5">
-              <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center flex-shrink-0">
-                <Phone className="w-6 h-6 text-[#0066FF]" />
+              <div className="w-14 h-14 bg-[#363E62]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                <Phone className="w-6 h-6 text-[#363E62]" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-gray-900">Предпочитаете позвонить?</h3>
+                <h3 className="text-xl font-bold text-[#363E62]">Предпочитаете позвонить?</h3>
                 <p className="text-gray-500">Наши специалисты готовы ответить на все вопросы</p>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <a
                 href="tel:+79001234567"
-                className="bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-3 rounded-2xl font-bold shadow-md shadow-blue-100 hover:shadow-blue-200 hover:scale-[1.02] transition-all"
+                className="bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-3 rounded-2xl font-bold shadow-md shadow-[#363E62]/15 hover:shadow-[#363E62]/20 hover:opacity-90 transition-all"
               >
                 +7 (900) 123-45-67
               </a>

@@ -31,7 +31,7 @@ const apartments = [
     price: 6800000,
     image: "https://images.unsplash.com/photo-1663756915301-2ba688e078cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBhcGFydG1lbnQlMjBpbnRlcmlvciUyMGxpdmluZyUyMHJvb218ZW58MXx8fHwxNzcyNjE2MTE4fDA&ixlib=rb-4.1.0&q=80&w=1080",
     badge: "Новинка",
-    badgeColor: "bg-[#0066FF]",
+    badgeColor: "bg-[#363E62]",
     objectId: 2,
   },
   {
@@ -73,15 +73,15 @@ function formatPrice(price: number) {
 
 export default function PopularApartments() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f5f5f5]">
       <div className="container mx-auto px-4">
         <div className="flex items-end justify-between mb-12">
           <div>
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#0066FF] rounded-full mb-4 font-medium shadow-sm"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#363E62] rounded-full mb-4 font-medium shadow-sm"
             >
               <Star className="w-4 h-4" />
               Подборка квартир
@@ -89,15 +89,15 @@ export default function PopularApartments() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-gray-900"
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+              className="text-4xl md:text-5xl font-bold text-[#363E62]"
             >
               Популярные квартиры
             </motion.h2>
           </div>
           <Link
             href="/objects"
-            className="hidden md:inline-flex items-center gap-2 text-[#0066FF] hover:gap-3 transition-all font-semibold group"
+            className="hidden md:inline-flex items-center gap-2 text-[#363E62] hover:gap-3 transition-all font-semibold group"
           >
             <span>Смотреть все</span>
             <ArrowRight className="w-5 h-5" />
@@ -108,9 +108,9 @@ export default function PopularApartments() {
           {apartments.map((apt, index) => (
             <motion.div
               key={apt.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
               transition={{ delay: index * 0.08 }}
             >
               <Link
@@ -133,8 +133,8 @@ export default function PopularApartments() {
 
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-900 font-bold text-lg">{apt.rooms}</span>
-                    <span className="text-[#0066FF] font-bold text-lg">{formatPrice(apt.price)}</span>
+                    <span className="text-[#363E62] font-bold text-lg">{apt.rooms}</span>
+                    <span className="text-[#363E62] font-bold text-lg">{formatPrice(apt.price)}</span>
                   </div>
 
                   <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
@@ -150,7 +150,7 @@ export default function PopularApartments() {
 
                   <div className="pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-1.5 text-sm text-gray-600">
-                      <Home className="w-3.5 h-3.5 text-[#0066FF]" />
+                      <Home className="w-3.5 h-3.5 text-[#363E62]" />
                       <span className="font-medium">{apt.complex}</span>
                     </div>
                     <div className="flex items-center gap-1.5 text-xs text-gray-400 mt-1">
@@ -167,7 +167,7 @@ export default function PopularApartments() {
         <div className="mt-8 text-center md:hidden">
           <Link
             href="/objects"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-4 rounded-2xl font-semibold"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-2xl font-semibold"
           >
             <span>Смотреть все квартиры</span>
             <ArrowRight className="w-5 h-5" />

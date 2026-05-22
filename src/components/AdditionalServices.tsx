@@ -14,8 +14,8 @@ const services = [
     image: "https://images.unsplash.com/photo-1635107624924-c209ff7330b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tZXJjaWFsJTIwb2ZmaWNlJTIwc3BhY2UlMjByZWFsJTIwZXN0YXRlfGVufDF8fHx8MTc3MjYyODQ4N3ww&ixlib=rb-4.1.0&q=80&w=1080",
     priceFrom: "от 8 500 000 ₽",
     tag: "от 40 м²",
-    accent: "from-blue-600 to-blue-800",
-    tagBg: "bg-blue-600",
+    accent: "from-[#363E62] to-[#232840]",
+    tagBg: "bg-[#363E62]",
   },
   {
     id: 2,
@@ -52,16 +52,28 @@ const services = [
   },
 ];
 
+import type { Variants } from "motion/react";
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const gridVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
 export default function AdditionalServices() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f5f5f5]">
       <div className="container mx-auto px-4">
         <div className="mb-12">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#0066FF] rounded-full mb-4 font-medium shadow-sm"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-[#363E62] rounded-full mb-4 font-medium shadow-sm"
           >
             <Package className="w-4 h-4" />
             Больше возможностей
@@ -69,23 +81,26 @@ export default function AdditionalServices() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-gray-900"
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-4xl md:text-5xl font-bold text-[#363E62]"
           >
             Дополнительно
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => {
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {services.map((service) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
+                variants={cardVariants}
                 className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 {/* Image */}
@@ -110,16 +125,16 @@ export default function AdditionalServices() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#0066FF] transition-colors">
+                  <h3 className="text-xl font-bold text-[#363E62] mb-3 group-hover:text-[#363E62] transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-sm text-gray-500 leading-relaxed mb-5">{service.description}</p>
 
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-gray-900">{service.priceFrom}</span>
+                    <span className="font-bold text-[#363E62]">{service.priceFrom}</span>
                     <Link
                       href="/objects"
-                      className="inline-flex items-center gap-1.5 text-[#0066FF] font-semibold text-sm hover:gap-2.5 transition-all"
+                      className="inline-flex items-center gap-1.5 text-[#363E62] font-semibold text-sm hover:gap-2.5 transition-all"
                     >
                       Подробнее
                       <ArrowRight className="w-4 h-4" />
@@ -129,7 +144,7 @@ export default function AdditionalServices() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

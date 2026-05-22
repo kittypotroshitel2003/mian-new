@@ -223,8 +223,8 @@ function CamerasTab({ cameras }: { cameras: Camera[] }) {
             onClick={() => setActiveId(cam.id)}
             className={`relative rounded-2xl overflow-hidden aspect-video group transition-all ${
               cam.id === activeId
-                ? "ring-2 ring-[#0066FF] ring-offset-2 shadow-lg shadow-blue-100"
-                : "ring-1 ring-gray-200 hover:ring-[#0066FF]/50"
+                ? "ring-2 ring-[#363E62] ring-offset-2 shadow-lg shadow-[#363E62]/15"
+                : "ring-1 ring-gray-200 hover:ring-[#363E62]/50"
             }`}
           >
             <ImageWithFallback
@@ -233,7 +233,7 @@ function CamerasTab({ cameras }: { cameras: Camera[] }) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
             <div className={`absolute inset-0 transition-colors ${
-              cam.id === activeId ? "bg-[#0066FF]/20" : "bg-black/30 group-hover:bg-black/20"
+              cam.id === activeId ? "bg-[#363E62]/20" : "bg-black/30 group-hover:bg-black/20"
             }`} />
             {/* badges */}
             <div className="absolute top-2 left-2 flex items-center gap-1.5">
@@ -250,7 +250,7 @@ function CamerasTab({ cameras }: { cameras: Camera[] }) {
               )}
             </div>
             {cam.id === activeId && (
-              <div className="absolute bottom-2 right-2 w-5 h-5 bg-[#0066FF] rounded-full flex items-center justify-center">
+              <div className="absolute bottom-2 right-2 w-5 h-5 bg-[#363E62] rounded-full flex items-center justify-center">
                 <Video className="w-2.5 h-2.5 text-white" />
               </div>
             )}
@@ -262,8 +262,8 @@ function CamerasTab({ cameras }: { cameras: Camera[] }) {
       </div>
 
       {/* Notice */}
-      <div className="flex items-start gap-3 bg-blue-50 border border-blue-100 rounded-2xl p-4 text-sm text-blue-700">
-        <Wifi className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#0066FF]" />
+      <div className="flex items-start gap-3 bg-[#363E62]/10 border border-[#363E62]/20 rounded-2xl p-4 text-sm text-[#232840]">
+        <Wifi className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#363E62]" />
         <p>Трансляция ведётся в режиме реального времени. Изображение обновляется раз в 30 секунд. Архив записей хранится 30 дней.</p>
       </div>
     </div>
@@ -275,17 +275,17 @@ function TimelineTab({ timeline, progress }: { timeline: TimelineItem[]; progres
   return (
     <div>
       {/* Overall progress */}
-      <div className="bg-gray-50 rounded-3xl p-6 mb-8">
+      <div className="bg-white rounded-3xl p-6 mb-8">
         <div className="flex items-center justify-between mb-3">
-          <p className="font-semibold text-gray-900">Общая готовность объекта</p>
-          <span className="text-2xl font-bold text-[#0066FF]">{progress}%</span>
+          <p className="font-semibold text-[#363E62]">Общая готовность объекта</p>
+          <span className="text-2xl font-bold text-[#363E62]">{progress}%</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="h-full rounded-full bg-gradient-to-r from-[#0066FF] to-[#00D9FF]"
+            className="h-full rounded-full bg-gradient-to-r from-[#363E62] to-[#232840]"
           />
         </div>
         <div className="flex justify-between text-xs text-gray-400 mt-2">
@@ -303,9 +303,9 @@ function TimelineTab({ timeline, progress }: { timeline: TimelineItem[]; progres
           {timeline.map((item, idx) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
               transition={{ delay: idx * 0.07 }}
               className="relative flex gap-5 pl-14"
             >
@@ -313,16 +313,16 @@ function TimelineTab({ timeline, progress }: { timeline: TimelineItem[]; progres
               <div className={`absolute left-0 w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 border-2 transition-colors z-10 ${
                 item.done
                   ? item.milestone
-                    ? "bg-[#0066FF] border-[#0066FF] shadow-md shadow-blue-200"
+                    ? "bg-[#363E62] border-[#363E62] shadow-md shadow-[#363E62]/20"
                     : "bg-emerald-500 border-emerald-500"
                   : item.milestone
-                    ? "bg-white border-[#0066FF] border-dashed"
+                    ? "bg-white border-[#363E62] border-dashed"
                     : "bg-white border-gray-300"
               }`}>
                 {item.done ? (
                   <CheckCircle2 className={`w-4 h-4 ${item.milestone ? "text-white" : "text-white"}`} />
                 ) : (
-                  <Circle className={`w-4 h-4 ${item.milestone ? "text-[#0066FF]" : "text-gray-300"}`} />
+                  <Circle className={`w-4 h-4 ${item.milestone ? "text-[#363E62]" : "text-gray-300"}`} />
                 )}
               </div>
 
@@ -330,21 +330,21 @@ function TimelineTab({ timeline, progress }: { timeline: TimelineItem[]; progres
               <div className={`flex-1 rounded-2xl p-5 mb-2 transition-colors ${
                 item.done
                   ? item.milestone
-                    ? "bg-blue-50 border border-blue-100"
-                    : "bg-gray-50 border border-gray-100"
+                    ? "bg-[#363E62]/10 border border-[#363E62]/20"
+                    : "bg-white border border-gray-100"
                   : "bg-white border border-dashed border-gray-200"
               }`}>
                 <div className="flex items-start justify-between gap-3 mb-1.5">
-                  <h3 className={`font-bold ${item.done ? "text-gray-900" : "text-gray-400"}`}>
+                  <h3 className={`font-bold ${item.done ? "text-[#363E62]" : "text-gray-400"}`}>
                     {item.title}
                     {item.milestone && (
-                      <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-[#0066FF] text-white">
+                      <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-[#363E62] text-white">
                         Ключевой этап
                       </span>
                     )}
                   </h3>
                   <span className={`flex-shrink-0 text-sm font-semibold ${
-                    item.done ? "text-[#0066FF]" : "text-gray-400"
+                    item.done ? "text-[#363E62]" : "text-gray-400"
                   }`}>{item.date}</span>
                 </div>
                 <p className={`text-sm leading-relaxed ${item.done ? "text-gray-600" : "text-gray-400"}`}>
@@ -393,7 +393,7 @@ function PhotosTab({ photoReports }: { photoReports: PhotoReport[] }) {
             onClick={() => setActiveMonth(r.month)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all ${
               r.month === activeMonth
-                ? "bg-[#0066FF] text-white shadow-md shadow-blue-200"
+                ? "bg-[#363E62] text-white shadow-md shadow-[#363E62]/20"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
@@ -412,8 +412,8 @@ function PhotosTab({ photoReports }: { photoReports: PhotoReport[] }) {
           transition={{ duration: 0.3 }}
         >
           {/* Report text */}
-          <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 mb-6 flex gap-3">
-            <Building2 className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-0.5" />
+          <div className="bg-[#363E62]/10 border border-[#363E62]/20 rounded-2xl p-5 mb-6 flex gap-3">
+            <Building2 className="w-5 h-5 text-[#363E62] flex-shrink-0 mt-0.5" />
             <p className="text-gray-700 leading-relaxed">{report.text}</p>
           </div>
 
@@ -526,7 +526,7 @@ export default function ConstructionDetail() {
   const [tab, setTab] = useState<TabId>("cameras");
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
 
       <PageHeader
         breadcrumbs={[
@@ -538,8 +538,8 @@ export default function ConstructionDetail() {
         subtitle={object.location}
         badge={
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-[#0066FF] rounded-full text-sm font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF] animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#363E62]/10 text-[#363E62] rounded-full text-sm font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#363E62] animate-pulse" />
               {object.status}
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 text-gray-600 rounded-full text-sm">
@@ -547,7 +547,7 @@ export default function ConstructionDetail() {
               Сдача: {object.completionDate}
             </span>
             <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 text-gray-700 rounded-full text-sm font-semibold">
-              Готовность: <span className="text-[#0066FF] font-bold">{object.progress}%</span>
+              Готовность: <span className="text-[#363E62] font-bold">{object.progress}%</span>
             </span>
           </div>
         }
@@ -564,14 +564,14 @@ export default function ConstructionDetail() {
               <div className="flex-1">
                 <div className="flex items-center justify-between mb-1.5">
                   <span className="text-sm text-gray-500">Прогресс</span>
-                  <span className="font-bold text-[#0066FF]">{object.progress}%</span>
+                  <span className="font-bold text-[#363E62]">{object.progress}%</span>
                 </div>
                 <div className="w-full bg-gray-100 rounded-full h-2.5">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${object.progress}%` }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full rounded-full bg-gradient-to-r from-[#0066FF] to-[#00D9FF]"
+                    className="h-full rounded-full bg-gradient-to-r from-[#363E62] to-[#232840]"
                   />
                 </div>
               </div>
@@ -587,7 +587,7 @@ export default function ConstructionDetail() {
                 key={tid}
                 onClick={() => setTab(tid)}
                 className={`relative flex items-center gap-2 px-5 py-4 text-sm font-semibold transition-colors ${
-                  tab === tid ? "text-[#0066FF]" : "text-gray-500 hover:text-gray-800"
+                  tab === tid ? "text-[#363E62]" : "text-gray-500 hover:text-gray-800"
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -595,7 +595,7 @@ export default function ConstructionDetail() {
                 {tab === tid && (
                   <motion.div
                     layoutId="tab-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0066FF] rounded-t-full"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#363E62] rounded-t-full"
                   />
                 )}
               </button>

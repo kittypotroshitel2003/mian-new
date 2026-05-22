@@ -52,7 +52,7 @@ const news = [
     id: 2,
     date: "1 марта 2026",
     category: "Старт продаж",
-    categoryColor: "bg-blue-100 text-[#0066FF]",
+    categoryColor: "bg-[#363E62]/15 text-[#363E62]",
     title: "Открыт старт продаж в ЖК «Южный Парк» — встречайте новый премиум-проект",
     excerpt: "Мы рады объявить о старте продаж квартир в новом жилом комплексе «Южный Парк» в ЮЗАО. Уникальная архитектура, развитая инфраструктура и панорамные виды.",
     image: "https://images.unsplash.com/photo-1768269378478-49d80e2320b7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyZWFsJTIwZXN0YXRlJTIwbmV3cyUyMGNvbnN0cnVjdGlvbiUyMGJ1aWxkaW5nfGVufDF8fHx8MTc3MjYyODQ4OXww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -70,15 +70,18 @@ const news = [
 
 export default function About() {
   const [partnerForm, setPartnerForm] = useState({ company: "", name: "", phone: "", email: "", type: "", message: "" });
+  const [partnerStatus, setPartnerStatus] = useState<"idle" | "success">("idle");
 
   const handlePartnerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Заявка отправлена! Мы свяжемся с вами в ближайшее время.");
+    // TODO: подключить backend (Telegram Bot / email-сервис)
+    // Пока форма не отправляет данные — показываем честное сообщение
+    setPartnerStatus("success");
     setPartnerForm({ company: "", name: "", phone: "", email: "", type: "", message: "" });
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-white min-h-screen">
 
       {/* ══ БАННЕР ══════════════════════════════════════════════════════ */}
       <section
@@ -89,12 +92,12 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         {/* Синяя полоса-акцент слева */}
-        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#0066FF] to-[#00D9FF]" />
+        <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-[#363E62] to-[#232840]" />
 
         <div className="relative z-10 w-full">
           <div className="container mx-auto px-4">
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               className="max-w-3xl"
@@ -107,13 +110,13 @@ export default function About() {
               </div>
 
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full mb-6">
-                <Building2 className="w-4 h-4 text-[#00D9FF]" />
+                <Building2 className="w-4 h-4 text-[#363E62]" />
                 <span className="text-white/90 font-medium text-sm">Основана в 2010 году</span>
               </div>
 
               <h1 className="text-5xl md:text-6xl font-bold text-white leading-tight mb-5">
                 О компании<br />
-                <span className="bg-gradient-to-r from-[#0066FF] to-[#00D9FF] bg-clip-text text-transparent">
+                <span className="text-white">
                   ООО МИАН
                 </span>
               </h1>
@@ -137,10 +140,10 @@ export default function About() {
                 transition={{ delay: i * 0.1 + 0.3 }}
                 className="flex flex-col items-center py-8 px-4 text-center"
               >
-                <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-3">
-                  <item.icon className="w-6 h-6 text-[#0066FF]" />
+                <div className="w-12 h-12 bg-[#363E62]/10 rounded-2xl flex items-center justify-center mb-3">
+                  <item.icon className="w-6 h-6 text-[#363E62]" />
                 </div>
-                <span className="text-3xl font-bold text-gray-900">{item.value}</span>
+                <span className="text-3xl font-bold text-[#363E62]">{item.value}</span>
                 <span className="text-sm text-gray-500 mt-1">{item.label}</span>
               </motion.div>
             ))}
@@ -149,15 +152,15 @@ export default function About() {
       </section>
 
       {/* ══ ИСТОРИЯ КОМПАНИИ ════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
             {/* Изображение */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
               transition={{ duration: 0.7 }}
               className="relative"
             >
@@ -180,37 +183,21 @@ export default function About() {
                 </div>
               </div>
 
-              {/* Бейдж «лет на рынке» */}
-              <div className="absolute -top-5 -right-5 bg-gradient-to-br from-[#0066FF] to-[#00D9FF] rounded-2xl p-5 shadow-xl text-white text-center w-28">
-                <p className="text-3xl font-bold">16</p>
-                <p className="text-xs text-white/80 mt-1">лет на рынке</p>
-              </div>
-
-              {/* Бейдж «объектов» */}
-              <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-3 border border-gray-100">
-                <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Award className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <p className="font-bold text-gray-900">25+ объектов</p>
-                  <p className="text-xs text-gray-500">успешно сдано</p>
-                </div>
-              </div>
             </motion.div>
 
             {/* Таймлайн */}
             <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "0px 0px -40px 0px" }}
               transition={{ duration: 0.7 }}
               className="lg:pl-6"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#0066FF] rounded-full mb-5 font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#363E62]/10 text-[#363E62] rounded-full mb-5 font-medium">
                 <Clock className="w-4 h-4" />
                 С 2010 года
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-10">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#363E62] leading-tight mb-10">
                 История компании
               </h2>
 
@@ -218,11 +205,11 @@ export default function About() {
                 {timeline.map((item, i) => (
                   <div key={i} className="flex gap-5">
                     <div className="flex flex-col items-center">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#0066FF] to-[#00D9FF] flex items-center justify-center flex-shrink-0 shadow-md shadow-blue-100">
+                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#363E62] to-[#232840] flex items-center justify-center flex-shrink-0 shadow-md shadow-[#363E62]/15">
                         <span className="text-white text-xs font-bold">{item.year}</span>
                       </div>
                       {i < timeline.length - 1 && (
-                        <div className="w-px flex-1 bg-gradient-to-b from-[#0066FF]/25 to-transparent my-1" style={{ minHeight: "32px" }} />
+                        <div className="w-px flex-1 bg-gradient-to-b from-[#363E62]/25 to-transparent my-1" style={{ minHeight: "32px" }} />
                       )}
                     </div>
                     <p className="text-gray-600 leading-relaxed pb-7 pt-2.5">{item.text}</p>
@@ -235,15 +222,15 @@ export default function About() {
       </section>
 
       {/* ══ ЛИЦЕНЗИИ И СЕРТИФИКАТЫ ══════════════════════════════════════ */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#0066FF] rounded-full mb-5 font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#363E62]/10 text-[#363E62] rounded-full mb-5 font-medium">
               <FileText className="w-4 h-4" />
               Документы
             </div>
@@ -263,14 +250,14 @@ export default function About() {
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -40px 0px" }}
                 transition={{ delay: i * 0.1 }}
                 className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow text-center"
               >
-                <div className="w-24 h-32 bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                <div className="w-24 h-32 bg-[#f5f5f5] border-2 border-dashed border-gray-200 rounded-xl mx-auto mb-4 flex items-center justify-center">
                   <FileText className="w-10 h-10 text-gray-300" />
                 </div>
-                <h3 className="font-semibold mb-1 text-gray-900">{doc.title}</h3>
+                <h3 className="font-semibold mb-1 text-[#363E62]">{doc.title}</h3>
                 <p className="text-sm text-gray-500">{doc.sub}</p>
               </motion.div>
             ))}
@@ -279,21 +266,21 @@ export default function About() {
       </section>
 
       {/* ══ ВАКАНСИИ ════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="mb-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#0066FF] rounded-full mb-4 font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#363E62]/10 text-[#363E62] rounded-full mb-4 font-medium">
               <Briefcase className="w-4 h-4" />
               Карьера в МИАН
             </div>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Вакансии</h2>
+                <h2 className="text-4xl md:text-5xl font-bold text-[#363E62] leading-tight">Вакансии</h2>
                 <p className="text-gray-500 mt-2 text-lg">Присоединяйтесь к команде — строим будущее вместе</p>
               </div>
               <div className="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full text-sm font-semibold flex-shrink-0">
@@ -309,13 +296,13 @@ export default function About() {
                 key={i}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -40px 0px" }}
                 transition={{ delay: i * 0.07 }}
-                className="group bg-gray-50 hover:bg-white border border-gray-100 hover:border-[#0066FF]/20 hover:shadow-md rounded-2xl px-6 py-5 flex flex-col md:flex-row md:items-center gap-4 transition-all cursor-pointer"
+                className="group bg-white hover:bg-white border border-gray-100 hover:border-[#363E62]/20 hover:shadow-md rounded-2xl px-6 py-5 flex flex-col md:flex-row md:items-center gap-4 transition-all cursor-pointer"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-1.5 flex-wrap">
-                    <h3 className="font-bold text-gray-900 group-hover:text-[#0066FF] transition-colors">{v.title}</h3>
+                    <h3 className="font-bold text-[#363E62] group-hover:text-[#363E62] transition-colors">{v.title}</h3>
                     {v.hot && (
                       <span className="px-2.5 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded-full">
                         Горячая вакансия
@@ -329,8 +316,8 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 flex-shrink-0">
-                  <span className="font-bold text-gray-900">{v.salary}</span>
-                  <div className="w-9 h-9 rounded-xl bg-gray-100 group-hover:bg-[#0066FF] flex items-center justify-center transition-colors">
+                  <span className="font-bold text-[#363E62]">{v.salary}</span>
+                  <div className="w-9 h-9 rounded-xl bg-gray-100 group-hover:bg-[#363E62] flex items-center justify-center transition-colors">
                     <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
                   </div>
                 </div>
@@ -342,16 +329,16 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-6 bg-gradient-to-r from-[#0066FF]/5 to-[#00D9FF]/5 border border-[#0066FF]/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4"
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+            className="mt-6 bg-gradient-to-r from-[#363E62]/5 to-[#363E62]/5 border border-[#363E62]/10 rounded-2xl px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4"
           >
             <div>
-              <p className="font-semibold text-gray-900">Не нашли подходящую вакансию?</p>
+              <p className="font-semibold text-[#363E62]">Не нашли подходящую вакансию?</p>
               <p className="text-sm text-gray-500 mt-0.5">Отправьте резюме — рассмотрим при появлении новых позиций</p>
             </div>
             <a
               href="mailto:hr@mian.ru"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-6 py-3 rounded-xl font-semibold shadow-md shadow-blue-100 hover:shadow-blue-200 hover:scale-[1.02] transition-all flex-shrink-0"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-6 py-3 rounded-xl font-semibold shadow-md shadow-[#363E62]/15 hover:shadow-[#363E62]/20 hover:opacity-90 transition-all flex-shrink-0"
             >
               <Send className="w-4 h-4" />
               Отправить резюме
@@ -361,18 +348,18 @@ export default function About() {
       </section>
 
       {/* ══ ПАРТНЁРАМ ════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="rounded-3xl overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-5"
           >
             {/* Левая синяя панель */}
-            <div className="lg:col-span-2 relative flex flex-col justify-between p-10 bg-gradient-to-br from-[#0066FF] to-[#0052CC] overflow-hidden">
+            <div className="lg:col-span-2 relative flex flex-col justify-between p-10 bg-gradient-to-br from-[#363E62] to-[#232840] overflow-hidden">
               <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-2xl" />
-              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#00D9FF]/20 rounded-full blur-2xl" />
+              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#363E62]/20 rounded-full blur-2xl" />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-8">
                   <Handshake className="w-7 h-7 text-white" />
@@ -387,7 +374,7 @@ export default function About() {
               <div className="relative z-10 space-y-3 mt-10">
                 {["Агентства недвижимости", "Банки и финансовые организации", "Строительные подрядчики", "Поставщики материалов"].map((item) => (
                   <div key={item} className="flex items-center gap-3 text-white/80 text-sm">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#363E62] flex-shrink-0" />
                     {item}
                   </div>
                 ))}
@@ -396,71 +383,110 @@ export default function About() {
 
             {/* Форма */}
             <div className="lg:col-span-3 bg-white p-10">
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">Оставьте заявку</h3>
-              <p className="text-gray-500 mb-7">Наш менеджер свяжется с вами в течение рабочего дня</p>
-              <form onSubmit={handlePartnerSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Компания *</label>
-                    <input type="text" value={partnerForm.company} onChange={(e) => setPartnerForm({ ...partnerForm, company: e.target.value })} placeholder="ООО Название" required className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
+              {partnerStatus === "success" ? (
+                <div className="flex flex-col items-center justify-center h-full min-h-[280px] text-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-[#363E62]/10 flex items-center justify-center">
+                    <Handshake className="w-6 h-6 text-[#363E62]" />
                   </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Контактное лицо *</label>
-                    <input type="text" value={partnerForm.name} onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })} placeholder="Иван Иванов" required className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
-                  </div>
+                  <h3 className="text-xl font-bold text-[#363E62]">Заявка получена</h3>
+                  <p className="text-gray-500 max-w-sm leading-relaxed">
+                    Автоматическая отправка пока не подключена. Напишите нам напрямую — рассмотрим предложение в течение рабочего дня.
+                  </p>
+                  <a
+                    href="mailto:partners@mian.ru"
+                    className="mt-2 inline-flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    <Send className="w-4 h-4" />
+                    partners@mian.ru
+                  </a>
+                  <button
+                    onClick={() => setPartnerStatus("idle")}
+                    className="text-sm text-gray-400 hover:text-[#363E62] transition-colors"
+                  >
+                    Заполнить снова
+                  </button>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Телефон *</label>
-                    <input type="tel" value={partnerForm.phone} onChange={(e) => setPartnerForm({ ...partnerForm, phone: e.target.value })} placeholder="+7 (900) 000-00-00" required className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Email *</label>
-                    <input type="email" value={partnerForm.email} onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })} placeholder="partner@company.ru" required className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Тип сотрудничества</label>
-                  <select value={partnerForm.type} onChange={(e) => setPartnerForm({ ...partnerForm, type: e.target.value })} className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all text-gray-700">
-                    <option value="">Выберите вариант</option>
-                    <option>Агентство недвижимости</option>
-                    <option>Банк / финансовая организация</option>
-                    <option>Строительный подрядчик</option>
-                    <option>Поставщик материалов</option>
-                    <option>Другое</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Комментарий</label>
-                  <textarea value={partnerForm.message} onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })} rows={3} placeholder="Расскажите о предложении..." className="w-full px-4 py-3 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#0066FF] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-300" />
-                </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-100 hover:shadow-blue-200 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
-                  <Send className="w-5 h-5" />
-                  Отправить заявку на партнёрство
-                </button>
-              </form>
+              ) : (
+                <>
+                  <h3 className="text-2xl font-bold text-[#363E62] mb-1">Оставьте заявку</h3>
+                  <p className="text-gray-500 mb-7">Наш менеджер свяжется с вами в течение рабочего дня</p>
+                  <form onSubmit={handlePartnerSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Компания *</label>
+                        <input type="text" value={partnerForm.company} onChange={(e) => setPartnerForm({ ...partnerForm, company: e.target.value })} placeholder="ООО Название" required className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Контактное лицо *</label>
+                        <input type="text" value={partnerForm.name} onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })} placeholder="Иван Иванов" required className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Телефон *</label>
+                        <input type="tel" value={partnerForm.phone} onChange={(e) => setPartnerForm({ ...partnerForm, phone: e.target.value })} placeholder="+7 (900) 000-00-00" required className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Email *</label>
+                        <input type="email" value={partnerForm.email} onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })} placeholder="partner@company.ru" required className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-300" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Тип сотрудничества</label>
+                      <select value={partnerForm.type} onChange={(e) => setPartnerForm({ ...partnerForm, type: e.target.value })} className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all text-gray-700">
+                        <option value="">Выберите вариант</option>
+                        <option>Агентство недвижимости</option>
+                        <option>Банк / финансовая организация</option>
+                        <option>Строительный подрядчик</option>
+                        <option>Поставщик материалов</option>
+                        <option>Другое</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Комментарий</label>
+                      <textarea value={partnerForm.message} onChange={(e) => setPartnerForm({ ...partnerForm, message: e.target.value })} rows={3} placeholder="Расскажите о предложении..." className="w-full px-4 py-3 bg-[#f5f5f5] rounded-xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all resize-none placeholder:text-gray-300" />
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="partner-privacy"
+                        required
+                        className="mt-0.5 w-4 h-4 accent-[#363E62] cursor-pointer"
+                      />
+                      <label htmlFor="partner-privacy" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
+                        Я согласен(а) с{" "}
+                        <a href="/privacy" className="text-[#363E62] hover:underline">политикой конфиденциальности</a>
+                      </label>
+                    </div>
+                    <button type="submit" className="w-full bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-[#363E62]/15 hover:shadow-[#363E62]/20 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                      <Send className="w-5 h-5" />
+                      Отправить заявку на партнёрство
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ══ НОВОСТИ ═════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-[#f5f5f5]">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="flex items-end justify-between mb-12"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#0066FF] rounded-full mb-4 font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#363E62]/10 text-[#363E62] rounded-full mb-4 font-medium">
                 <Newspaper className="w-4 h-4" />
                 Актуально
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Новости компании</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-[#363E62]">Новости компании</h2>
             </div>
-            <Link href="/" className="hidden md:inline-flex items-center gap-2 text-[#0066FF] font-semibold hover:gap-3 transition-all group">
+            <Link href="/" className="hidden md:inline-flex items-center gap-2 text-[#363E62] font-semibold hover:gap-3 transition-all group">
               Все новости
               <ArrowRight className="w-5 h-5" />
             </Link>
@@ -470,9 +496,9 @@ export default function About() {
             {news.map((item, index) => (
               <motion.article
                 key={item.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, margin: "0px 0px -40px 0px" }}
                 transition={{ delay: index * 0.1 }}
                 className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
               >
@@ -495,11 +521,11 @@ export default function About() {
                     <Calendar className="w-3.5 h-3.5" />
                     {item.date}
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-3 leading-snug group-hover:text-[#0066FF] transition-colors line-clamp-2">
+                  <h3 className="font-bold text-[#363E62] mb-3 leading-snug group-hover:text-[#363E62] transition-colors line-clamp-2">
                     {item.title}
                   </h3>
                   <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-4">{item.excerpt}</p>
-                  <button className="inline-flex items-center gap-2 text-[#0066FF] font-semibold text-sm hover:gap-3 transition-all group/link">
+                  <button className="inline-flex items-center gap-2 text-[#363E62] font-semibold text-sm hover:gap-3 transition-all group/link">
                     Читать далее
                     <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                   </button>
@@ -511,23 +537,23 @@ export default function About() {
       </section>
 
       {/* ══ CTA ══════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-gradient-to-r from-[#0066FF] to-[#0052CC] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#363E62] to-[#232840] text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
           >
             <h2 className="text-4xl font-bold mb-5">Хотите стать частью нашей истории?</h2>
             <p className="text-xl mb-10 opacity-80 max-w-2xl mx-auto">
               Выберите квартиру в одном из наших жилых комплексов и станьте владельцем качественного и комфортного жилья
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/objects" className="bg-white text-[#0066FF] hover:bg-gray-100 px-8 py-4 rounded-2xl font-semibold transition-colors inline-flex items-center gap-2 justify-center">
+              <Link href="/objects" className="bg-white text-[#363E62] hover:bg-gray-100 px-8 py-4 rounded-2xl font-semibold transition-colors inline-flex items-center gap-2 justify-center">
                 Посмотреть объекты
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link href="/" className="border-2 border-white/40 hover:border-white hover:bg-white/10 px-8 py-4 rounded-2xl font-semibold transition-all inline-flex items-center gap-2 justify-center">
+              <Link href="/#consultation-form" className="border-2 border-white/40 hover:border-white hover:bg-white/10 px-8 py-4 rounded-2xl font-semibold transition-all inline-flex items-center gap-2 justify-center">
                 Получить консультацию
               </Link>
             </div>

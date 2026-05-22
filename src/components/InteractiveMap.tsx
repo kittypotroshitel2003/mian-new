@@ -81,7 +81,7 @@ export default function InteractiveMap() {
         L.divIcon({
           html: `
             <div style="
-              background: linear-gradient(135deg, #0066FF, #00D9FF);
+              background: linear-gradient(135deg, #363E62, #232840);
               width: 44px;
               height: 44px;
               border-radius: 50% 50% 50% 0;
@@ -152,15 +152,15 @@ export default function InteractiveMap() {
           </button>
 
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#0066FF] to-[#00D9FF] rounded-xl flex items-center justify-center flex-shrink-0">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#363E62] to-[#232840] rounded-xl flex items-center justify-center flex-shrink-0">
               <MapPin className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-gray-900">{selected.name}</h3>
+              <h3 className="font-bold text-[#363E62]">{selected.name}</h3>
               <span
                 className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                   selected.status === "Строится"
-                    ? "bg-blue-100 text-[#0066FF]"
+                    ? "bg-[#363E62]/15 text-[#363E62]"
                     : "bg-green-100 text-green-700"
                 }`}
               >
@@ -172,10 +172,10 @@ export default function InteractiveMap() {
           <p className="text-sm text-gray-500 mb-3">{selected.address}</p>
 
           <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-            <span className="font-bold text-gray-900">{selected.price}</span>
+            <span className="font-bold text-[#363E62]">{selected.price}</span>
             <Link
               href={`/objects/${selected.objectId}`}
-              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white text-sm font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#363E62] to-[#232840] text-white text-sm font-semibold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity"
             >
               Подробнее
               <ArrowRight className="w-3.5 h-3.5" />
@@ -186,7 +186,7 @@ export default function InteractiveMap() {
 
       {/* Legend */}
       <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg px-4 py-3 z-[1000] flex items-center gap-2">
-        <div className="w-4 h-4 rounded-full bg-gradient-to-br from-[#0066FF] to-[#00D9FF]" />
+        <div className="w-4 h-4 rounded-full bg-gradient-to-br from-[#363E62] to-[#232840]" />
         <span className="text-sm font-medium text-gray-700">Жилые комплексы МИАН</span>
       </div>
 
@@ -194,7 +194,7 @@ export default function InteractiveMap() {
       {!mapReady && (
         <div className="absolute inset-0 bg-gray-100 rounded-3xl flex items-center justify-center">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-[#0066FF] border-t-transparent rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-[#363E62] border-t-transparent rounded-full animate-spin" />
             <span className="text-gray-500 text-sm">Загрузка карты...</span>
           </div>
         </div>

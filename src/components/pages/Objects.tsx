@@ -128,14 +128,14 @@ export default function Objects() {
                            filters.search !== "";
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
 
       <PageHeader
         breadcrumbs={[{ label: "Главная", to: "/" }, { label: "Объекты" }]}
         title="Наши объекты"
         subtitle={`Выберите квартиру мечты из ${allObjects.length} жилых комплексов`}
         badge={
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-[#0066FF] rounded-full text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#363E62]/10 text-[#363E62] rounded-full text-sm font-medium">
             <Building2 className="w-4 h-4" />
             {allObjects.length} жилых комплекса
           </div>
@@ -157,10 +157,10 @@ export default function Objects() {
               className="w-full flex items-center justify-between px-6 py-4 bg-white rounded-2xl shadow-lg"
             >
               <div className="flex items-center gap-3">
-                <SlidersHorizontal className="w-5 h-5 text-[#0066FF]" />
+                <SlidersHorizontal className="w-5 h-5 text-[#363E62]" />
                 <span className="font-semibold">Фильтры</span>
                 {hasActiveFilters && (
-                  <span className="px-2 py-1 bg-[#0066FF] text-white text-xs rounded-full">
+                  <span className="px-2 py-1 bg-[#363E62] text-white text-xs rounded-full">
                     Активны
                   </span>
                 )}
@@ -197,7 +197,7 @@ export default function Objects() {
                         placeholder="Название ЖК..."
                         value={filters.search}
                         onChange={(e) => setFilters({ ...filters, search: e.target.value })}
-                        className="w-full pl-12 pr-4 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all"
+                        className="w-full pl-12 pr-4 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all"
                       />
                     </div>
                   </div>
@@ -210,7 +210,7 @@ export default function Objects() {
                     <select
                       value={filters.status}
                       onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all appearance-none cursor-pointer"
                     >
                       <option value="all">Все статусы</option>
                       <option value="Строится">Строится</option>
@@ -227,7 +227,7 @@ export default function Objects() {
                     <select
                       value={filters.district}
                       onChange={(e) => setFilters({ ...filters, district: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all appearance-none cursor-pointer"
                     >
                       <option value="all">Все районы</option>
                       <option value="Северный">Северный</option>
@@ -246,8 +246,8 @@ export default function Objects() {
                       disabled={!hasActiveFilters}
                       className={`w-full px-4 py-3 rounded-2xl font-semibold transition-all ${
                         hasActiveFilters
-                          ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-                          : "bg-gray-50 text-gray-400 cursor-not-allowed"
+                          ? "bg-gray-100 text-[#363E62] hover:bg-gray-200"
+                          : "bg-white text-gray-400 cursor-not-allowed"
                       }`}
                     >
                       Сбросить
@@ -266,7 +266,7 @@ export default function Objects() {
                       placeholder="3 000 000"
                       value={filters.priceFrom}
                       onChange={(e) => setFilters({ ...filters, priceFrom: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all"
                     />
                   </div>
                   <div>
@@ -278,7 +278,7 @@ export default function Objects() {
                       placeholder="15 000 000"
                       value={filters.priceTo}
                       onChange={(e) => setFilters({ ...filters, priceTo: e.target.value })}
-                      className="w-full px-4 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all"
                     />
                   </div>
                 </div>
@@ -295,14 +295,14 @@ export default function Objects() {
         >
           <div className="text-gray-600">
             Найдено объектов:{" "}
-            <span className="font-bold text-2xl text-gray-900 ml-2">
+            <span className="font-bold text-2xl text-[#363E62] ml-2">
               {filteredObjects.length}
             </span>
           </div>
           {hasActiveFilters && (
             <button
               onClick={resetFilters}
-              className="text-sm text-[#0066FF] hover:text-[#0052CC] font-medium flex items-center gap-2"
+              className="text-sm text-[#363E62] hover:text-[#232840] font-medium flex items-center gap-2"
             >
               <X className="w-4 h-4" />
               Сбросить фильтры
@@ -316,7 +316,7 @@ export default function Objects() {
             {filteredObjects.map((object, index) => (
               <motion.div
                 key={object.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
               >
@@ -330,7 +330,7 @@ export default function Objects() {
                       alt={object.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                     <div className="absolute top-4 left-4">
                       <div
                         className={`px-4 py-2 backdrop-blur-md rounded-full text-sm font-semibold shadow-lg ${
@@ -338,7 +338,7 @@ export default function Objects() {
                             ? "bg-green-500/90 text-white"
                             : object.status === "Старт продаж"
                             ? "bg-orange-500/90 text-white"
-                            : "bg-blue-500/90 text-white"
+                            : "bg-[#363E62]/90 text-white"
                         }`}
                       >
                         {object.status}
@@ -346,33 +346,33 @@ export default function Objects() {
                     </div>
                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
-                        <ArrowRight className="w-5 h-5 text-[#0066FF]" />
+                        <ArrowRight className="w-5 h-5 text-[#363E62]" />
                       </div>
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-[#0066FF] transition-colors">
+                    <h3 className="text-2xl font-bold mb-3 text-[#363E62] group-hover:text-[#363E62] transition-colors">
                       {object.name}
                     </h3>
 
                     <div className="flex items-center gap-2 text-gray-600 mb-6">
-                      <MapPin className="w-4 h-4 text-[#0066FF]" />
+                      <MapPin className="w-4 h-4 text-[#363E62]" />
                       <span>{object.location}</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4 mb-6 pb-6 border-b border-gray-100">
                       <div>
                         <div className="text-sm text-gray-500 mb-1">Квартир</div>
-                        <div className="font-bold text-gray-900 flex items-center gap-2">
-                          <Building2 className="w-4 h-4 text-[#0066FF]" />
+                        <div className="font-bold text-[#363E62] flex items-center gap-2">
+                          <Building2 className="w-4 h-4 text-[#363E62]" />
                           {object.apartments} шт
                         </div>
                       </div>
                       <div>
                         <div className="text-sm text-gray-500 mb-1">Срок сдачи</div>
-                        <div className="font-bold text-gray-900 flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-[#0066FF]" />
+                        <div className="font-bold text-[#363E62] flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-[#363E62]" />
                           {object.completionDate}
                         </div>
                       </div>
@@ -380,7 +380,7 @@ export default function Objects() {
 
                     <div>
                       <div className="text-sm text-gray-500 mb-2">Цена</div>
-                      <div className="text-3xl font-bold bg-gradient-to-r from-[#0066FF] to-[#00D9FF] bg-clip-text text-transparent mb-1">
+                      <div className="text-3xl font-bold bg-gradient-to-r from-[#363E62] to-[#232840] bg-clip-text text-transparent mb-1">
                         от {formatPrice(object.priceFrom)}
                       </div>
                       <div className="text-sm text-gray-600">
@@ -401,7 +401,7 @@ export default function Objects() {
             <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
               <Building2 className="w-12 h-12 text-gray-400" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+            <h3 className="text-2xl font-bold text-[#363E62] mb-3">
               Объекты не найдены
             </h3>
             <p className="text-gray-600 mb-8 max-w-md mx-auto">
@@ -409,7 +409,7 @@ export default function Objects() {
             </p>
             <button
               onClick={resetFilters}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all"
             >
               Сбросить фильтры
             </button>
@@ -418,17 +418,17 @@ export default function Objects() {
       </div>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-[#363E62]/5">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
             className="bg-white rounded-3xl shadow-xl p-8 md:p-12"
           >
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="flex-1">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#363E62] mb-4">
                   Не нашли подходящий вариант?
                 </h2>
                 <p className="text-lg text-gray-600 mb-6">
@@ -437,7 +437,7 @@ export default function Objects() {
               </div>
               <Link
                 href="/#consultation-form"
-                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl hover:opacity-90 transition-all"
               >
                 <span>Получить консультацию</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -51,17 +51,17 @@ export default function MortgageCalculator() {
     { name: "Основной долг", value: Math.round(loanAmount) },
     { name: "Переплата",     value: Math.round(overpayment) },
   ];
-  const PIE_COLORS = ["#0066FF", "#FF4D4D"];
+  const PIE_COLORS = ["#363E62", "#FF4D4D"];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-background min-h-screen">
 
       <PageHeader
         breadcrumbs={[{ label: "Главная", to: "/" }, { label: "Ипотека" }]}
         title="Ипотечный калькулятор"
         subtitle="Рассчитайте ежемесячный платёж и подберите оптимальные условия кредитования"
         badge={
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-[#0066FF] rounded-full text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#363E62]/10 text-[#363E62] rounded-full text-sm font-medium">
             <Calculator className="w-4 h-4" />
             Ставки от 6%
           </div>
@@ -76,23 +76,23 @@ export default function MortgageCalculator() {
 
             {/* Форма параметрв */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8"
             >
-              <h2 className="text-2xl font-bold mb-8 text-gray-900">Параметры кредита</h2>
+              <h2 className="text-2xl font-bold mb-8 text-[#363E62]">Параметры кредита</h2>
 
               <div className="space-y-7">
                 {/* Стоимость */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <label className="font-medium text-gray-700">Стоимость недвижимости</label>
-                    <span className="font-bold text-[#0066FF]">{formatPrice(price)}</span>
+                    <span className="font-bold text-[#363E62]">{formatPrice(price)}</span>
                   </div>
                   <input type="range" min="1000000" max="30000000" step="100000"
                     value={price} onChange={(e) => setPrice(Number(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0066FF]"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#363E62]"
                   />
                   <div className="flex justify-between text-sm text-gray-400 mt-1.5">
                     <span>1 млн ₽</span><span>30 млн ₽</span>
@@ -105,11 +105,11 @@ export default function MortgageCalculator() {
                     <label className="font-medium text-gray-700">
                       Первоначальный взнос ({initPercent.toFixed(0)}%)
                     </label>
-                    <span className="font-bold text-[#0066FF]">{formatPrice(initialPayment)}</span>
+                    <span className="font-bold text-[#363E62]">{formatPrice(initialPayment)}</span>
                   </div>
                   <input type="range" min={price * 0.1} max={price * 0.8} step="10000"
                     value={initialPayment} onChange={(e) => setInitialPayment(Number(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0066FF]"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#363E62]"
                   />
                   <div className="flex justify-between text-sm text-gray-400 mt-1.5">
                     <span>10%</span><span>80%</span>
@@ -120,11 +120,11 @@ export default function MortgageCalculator() {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <label className="font-medium text-gray-700">Срок кредита</label>
-                    <span className="font-bold text-[#0066FF]">{term} лет</span>
+                    <span className="font-bold text-[#363E62]">{term} лет</span>
                   </div>
                   <input type="range" min="1" max="30" step="1"
                     value={term} onChange={(e) => setTerm(Number(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0066FF]"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#363E62]"
                   />
                   <div className="flex justify-between text-sm text-gray-400 mt-1.5">
                     <span>1 год</span><span>30 лет</span>
@@ -141,7 +141,7 @@ export default function MortgageCalculator() {
                         onClick={() => setSelectedBank(bank)}
                         className={`p-4 rounded-2xl border-2 transition-all text-left ${
                           selectedBank.id === bank.id
-                            ? "border-[#0066FF] bg-blue-50"
+                            ? "border-[#363E62] bg-[#363E62]/10"
                             : "border-gray-200 hover:border-gray-300 bg-white"
                         }`}
                       >
@@ -152,7 +152,7 @@ export default function MortgageCalculator() {
                           {bank.name[0]}
                         </div>
                         <div className="font-semibold text-sm text-gray-800 mb-0.5">{bank.name}</div>
-                        <div className="font-bold text-[#0066FF]">{bank.rate}%</div>
+                        <div className="font-bold text-[#363E62]">{bank.rate}%</div>
                       </button>
                     ))}
                   </div>
@@ -162,13 +162,13 @@ export default function MortgageCalculator() {
 
             {/* Результаты */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="space-y-6"
             >
               {/* Ежемесячный платёж */}
-              <div className="bg-gradient-to-r from-[#0066FF] to-[#0052CC] text-white rounded-3xl p-8 shadow-lg shadow-blue-200">
+              <div className="bg-gradient-to-r from-[#363E62] to-[#232840] text-white rounded-3xl p-8 shadow-lg shadow-[#363E62]/20">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
                     <TrendingDown className="w-5 h-5" />
@@ -176,18 +176,18 @@ export default function MortgageCalculator() {
                   <h3 className="text-lg font-semibold">Ежемесячный платёж</h3>
                 </div>
                 <div className="text-4xl font-bold mb-2">{formatPrice(monthlyPayment)}</div>
-                <div className="text-blue-100 text-sm">На {term} лет под {selectedBank.rate}% годовых</div>
+                <div className="text-white/80 text-sm">На {term} лет под {selectedBank.rate}% годовых</div>
               </div>
 
               {/* Детали расчёта */}
               <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-                <h3 className="text-xl font-bold mb-6 text-gray-900">Детали расчёта</h3>
+                <h3 className="text-xl font-bold mb-6 text-[#363E62]">Детали расчёта</h3>
                 <div className="space-y-4">
                   {[
-                    { label: "Сумма кредита",        value: formatPrice(loanAmount),  color: "text-gray-900" },
+                    { label: "Сумма кредита",        value: formatPrice(loanAmount),  color: "text-[#363E62]" },
                     { label: "Переплата по кредиту", value: formatPrice(overpayment), color: "text-red-500"  },
-                    { label: "Общая сумма выплат",   value: formatPrice(totalPayment), color: "text-gray-900" },
-                    { label: "Процентная ставка",    value: `${selectedBank.rate}%`,  color: "text-[#0066FF]" },
+                    { label: "Общая сумма выплат",   value: formatPrice(totalPayment), color: "text-[#363E62]" },
+                    { label: "Процентная ставка",    value: `${selectedBank.rate}%`,  color: "text-[#363E62]" },
                   ].map((row, i, arr) => (
                     <div key={i} className={`flex justify-between items-center py-3 ${i < arr.length - 1 ? "border-b border-gray-100" : ""}`}>
                       <span className="text-gray-500">{row.label}</span>
@@ -195,22 +195,22 @@ export default function MortgageCalculator() {
                     </div>
                   ))}
                 </div>
-                <button className="w-full mt-7 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] hover:shadow-blue-200 text-white py-4 rounded-xl font-semibold transition-all hover:shadow-lg flex items-center justify-center gap-2">
+                <button className="w-full mt-7 bg-gradient-to-r from-[#363E62] to-[#232840] hover:shadow-[#363E62]/20 text-white py-4 rounded-xl font-semibold transition-all hover:shadow-lg flex items-center justify-center gap-2">
                   <Send className="w-5 h-5" />
                   Оформить заявку
                 </button>
               </div>
 
               {/* Быстрые контакты */}
-              <div className="bg-blue-50 rounded-3xl p-6 flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#0066FF] rounded-2xl flex items-center justify-center flex-shrink-0">
+              <div className="bg-[#363E62]/10 rounded-3xl p-6 flex items-center gap-4">
+                <div className="w-12 h-12 bg-[#363E62] rounded-2xl flex items-center justify-center flex-shrink-0">
                   <Phone className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-gray-900">Нужна помощь?</p>
+                  <p className="font-semibold text-[#363E62]">Нужна помощь?</p>
                   <p className="text-sm text-gray-500">Ипотечный брокер поможет подобрать условия</p>
                 </div>
-                <a href="tel:+79001234567" className="flex-shrink-0 bg-[#0066FF] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#0052CC] transition-colors">
+                <a href="tel:+79001234567" className="flex-shrink-0 bg-[#363E62] text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-[#232840] transition-colors">
                   Позвонить
                 </a>
               </div>
@@ -227,7 +227,7 @@ export default function MortgageCalculator() {
               viewport={{ once: true }}
               className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8"
             >
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Распределение платежей по годам</h3>
+              <h3 className="text-xl font-bold mb-2 text-[#363E62]">Распределение платежей по годам</h3>
               <p className="text-sm text-gray-400 mb-6">Основной долг vs. проценты</p>
               <ResponsiveContainer width="100%" height={260}>
                 <BarChart
@@ -240,8 +240,8 @@ export default function MortgageCalculator() {
                   <YAxis tick={{ fontSize: 11, fill: "#9ca3af" }} tickFormatter={(v) => `${(v / 1000).toFixed(0)}k`} />
                   <Tooltip formatter={(v) => formatPrice(Number(v))} />
                   <Legend />
-                  <Bar dataKey="principal" name="Основной долг" fill="#0066FF" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="interest" name="Проценты" fill="#00D9FF" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="principal" name="Основной долг" fill="#363E62" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="interest" name="Проценты" fill="#4a5280" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </motion.div>
@@ -254,7 +254,7 @@ export default function MortgageCalculator() {
               transition={{ delay: 0.1 }}
               className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8"
             >
-              <h3 className="text-xl font-bold mb-2 text-gray-900">Структура общих выплат</h3>
+              <h3 className="text-xl font-bold mb-2 text-[#363E62]">Структура общих выплат</h3>
               <p className="text-sm text-gray-400 mb-6">Долг и переплата за весь срок</p>
               <ResponsiveContainer width="100%" height={260}>
                 <PieChart key={`pie-${loanAmount}-${term}`}>
@@ -277,7 +277,7 @@ export default function MortgageCalculator() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-8 bg-gradient-to-r from-[#0066FF] to-[#0052CC] rounded-3xl p-8 md:p-12 text-white"
+            className="mt-8 bg-gradient-to-r from-[#363E62] to-[#232840] rounded-3xl p-8 md:p-12 text-white"
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
@@ -286,14 +286,14 @@ export default function MortgageCalculator() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">Нужна помощь с ипотекой?</h3>
-                  <p className="text-blue-100 max-w-xl">
+                  <p className="text-white/80 max-w-xl">
                     Наши ипотечные брокеры помогут подобрать оптимальные условия, подготовить документы и получить одобрение в кратчайшие сроки.
                   </p>
                 </div>
               </div>
               <Link
                 href="/about"
-                className="flex-shrink-0 bg-white text-[#0066FF] hover:bg-blue-50 px-8 py-4 rounded-2xl font-bold transition-colors shadow-lg whitespace-nowrap"
+                className="flex-shrink-0 bg-white text-[#363E62] hover:bg-[#363E62]/10 px-8 py-4 rounded-2xl font-bold transition-colors shadow-lg whitespace-nowrap"
               >
                 Проконсультироваться
               </Link>

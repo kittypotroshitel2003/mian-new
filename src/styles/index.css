@@ -34,6 +34,14 @@
   /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* запрещаем горизонтальный скролл */
+  }
+
+  body {
+    overflow-x: hidden;
+    /* GPU-слой для Framer Motion анимаций — убирает дёргание */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 
   /* Custom scrollbar */
@@ -43,28 +51,28 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #FFFCF7;
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #0066FF 0%, #00D9FF 100%);
+    background: linear-gradient(180deg, #363E62 0%, #232840 100%);
     border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #0052CC 0%, #00B8D4 100%);
+    background: linear-gradient(180deg, #232840 0%, #1a1f35 100%);
   }
 }
 
 /* Selection color */
 ::selection {
-  background-color: #0066FF;
+  background-color: #363E62;
   color: white;
 }
 
 ::-moz-selection {
-  background-color: #0066FF;
+  background-color: #363E62;
   color: white;
 }
 

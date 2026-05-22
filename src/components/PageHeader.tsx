@@ -26,7 +26,7 @@ export function PageHeader({ breadcrumbs, title, subtitle, badge }: PageHeaderPr
   return (
     <div className="relative bg-white border-b border-gray-100">
       {/* Левый акцент — единый визуальный маркер с баннерами */}
-      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#0066FF] to-[#00D9FF]" />
+      <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#363E62] to-[#232840]" />
 
       <div className="container mx-auto px-4 py-8 md:py-10">
         {/* Хлебные крошки */}
@@ -42,7 +42,7 @@ export function PageHeader({ breadcrumbs, title, subtitle, badge }: PageHeaderPr
               {crumb.to ? (
                 <Link
                   href={crumb.to}
-                  className="hover:text-[#0066FF] transition-colors"
+                  className="hover:text-[#363E62] transition-colors"
                 >
                   {crumb.label}
                 </Link>
@@ -70,7 +70,7 @@ export function PageHeader({ breadcrumbs, title, subtitle, badge }: PageHeaderPr
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08 }}
-          className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight"
+          className="text-3xl md:text-4xl font-bold text-[#363E62] leading-tight"
         >
           {title}
         </motion.h1>

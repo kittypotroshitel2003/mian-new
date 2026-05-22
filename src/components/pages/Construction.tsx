@@ -127,7 +127,7 @@ function MiniCameraWidget({
             <Link
               href={`/construction/${objectId}`}
               onClick={(e) => e.stopPropagation()}
-              className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-[#0066FF] hover:bg-[#0052CC] text-white text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors z-10"
+              className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-[#363E62] hover:bg-[#232840] text-white text-xs font-semibold px-3 py-1.5 rounded-xl transition-colors z-10"
             >
               <Camera className="w-3 h-3" />
               Все камеры
@@ -139,7 +139,7 @@ function MiniCameraWidget({
                 key={cam.id}
                 onClick={() => setActive(cam.id)}
                 className={`relative aspect-video overflow-hidden transition-all ${
-                  cam.id === active ? "ring-2 ring-inset ring-[#0066FF]" : "opacity-60 hover:opacity-100"
+                  cam.id === active ? "ring-2 ring-inset ring-[#363E62]" : "opacity-60 hover:opacity-100"
                 }`}
               >
                 <ImageWithFallback
@@ -149,7 +149,7 @@ function MiniCameraWidget({
                   style={{ display: "block" }}
                 />
                 <div className="absolute inset-0 bg-black/30" />
-                <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${cam.online ? "bg-red-500 animate-pulse" : "bg-gray-500"}`} />
+                <span className={`absolute top-1 left-1 w-1.5 h-1.5 rounded-full ${cam.online ? "bg-red-500 animate-pulse" : "bg-white0"}`} />
                 <p className="absolute bottom-1 left-0 right-0 text-center text-white text-[9px] truncate px-1 drop-shadow">{cam.name}</p>
               </button>
             ))}
@@ -170,14 +170,14 @@ export default function Construction() {
   );
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-white min-h-screen">
 
       <PageHeader
         breadcrumbs={[{ label: "Главная", to: "/" }, { label: "Ход строительства" }]}
         title="Ход строительства"
         subtitle="Онлайн-камеры, фотоотчёты и хронология — следите за стройкой в реальном времени"
         badge={
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-[#0066FF] rounded-full text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#363E62]/10 text-[#363E62] rounded-full text-sm font-medium">
             <Building2 className="w-4 h-4" />
             Строим открыто
           </div>
@@ -196,7 +196,7 @@ export default function Construction() {
                 onClick={() => setSelectedObject(obj)}
                 className={`px-5 py-2.5 rounded-xl font-medium text-sm transition-all ${
                   selectedObject === obj
-                    ? "bg-[#0066FF] text-white shadow-md shadow-blue-200"
+                    ? "bg-[#363E62] text-white shadow-md shadow-[#363E62]/20"
                     : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
                 }`}
               >
@@ -219,7 +219,7 @@ export default function Construction() {
                 <div className="p-6 md:p-8">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-5">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-1.5">{report.objectName}</h2>
+                      <h2 className="text-2xl font-bold text-[#363E62] mb-1.5">{report.objectName}</h2>
                       <div className="flex items-center gap-2 text-gray-500 text-sm">
                         <Calendar className="w-4 h-4" />
                         {report.date}
@@ -233,10 +233,10 @@ export default function Construction() {
                             initial={{ width: 0 }}
                             animate={{ width: `${report.progress}%` }}
                             transition={{ duration: 1, ease: "easeOut", delay: idx * 0.1 }}
-                            className="h-full rounded-full bg-gradient-to-r from-[#0066FF] to-[#00D9FF]"
+                            className="h-full rounded-full bg-gradient-to-r from-[#363E62] to-[#232840]"
                           />
                         </div>
-                        <span className="font-bold text-[#0066FF]">{report.progress}%</span>
+                        <span className="font-bold text-[#363E62]">{report.progress}%</span>
                       </div>
                     </div>
                   </div>
@@ -266,13 +266,13 @@ export default function Construction() {
                 </AnimatePresence>
 
                 {/* Нижняя панель */}
-                <div className="bg-gray-50 px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-gray-100">
+                <div className="bg-white px-6 md:px-8 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-gray-100">
                   <button
                     onClick={() => setOpenCamera(openCamera === report.id ? null : report.id)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
                       openCamera === report.id
-                        ? "bg-[#0066FF] text-white"
-                        : "bg-white border border-gray-200 text-gray-700 hover:border-[#0066FF] hover:text-[#0066FF]"
+                        ? "bg-[#363E62] text-white"
+                        : "bg-white border border-gray-200 text-gray-700 hover:border-[#363E62] hover:text-[#363E62]"
                     }`}
                   >
                     <Camera className="w-4 h-4" />
@@ -290,7 +290,7 @@ export default function Construction() {
                     </div>
                     <Link
                       href={`/construction/${report.objectId}`}
-                      className="flex items-center gap-2 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white px-5 py-2 rounded-xl text-sm font-semibold hover:shadow-md hover:shadow-blue-100 transition-all hover:scale-[1.02]"
+                      className="flex items-center gap-2 bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-5 py-2 rounded-xl text-sm font-semibold hover:shadow-md hover:shadow-[#363E62]/15 hover:opacity-90 transition-all"
                     >
                       Смотреть
                       <ArrowRight className="w-4 h-4" />
@@ -307,7 +307,7 @@ export default function Construction() {
                 <h3 className="text-xl font-semibold mb-2">Отчёты не найдены</h3>
                 <button
                   onClick={() => setSelectedObject("all")}
-                  className="mt-4 bg-[#0066FF] hover:bg-[#0052CC] text-white px-6 py-2.5 rounded-xl transition-colors font-semibold"
+                  className="mt-4 bg-[#363E62] hover:bg-[#232840] text-white px-6 py-2.5 rounded-xl transition-colors font-semibold"
                 >
                   Сбросить фильтры
                 </button>
@@ -319,14 +319,14 @@ export default function Construction() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 bg-gradient-to-r from-[#0066FF] to-[#0052CC] text-white rounded-3xl shadow-xl p-8 md:p-12 text-center"
+            viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+            className="mt-12 bg-gradient-to-r from-[#363E62] to-[#232840] text-white rounded-3xl shadow-xl p-8 md:p-12 text-center"
           >
             <h2 className="text-3xl font-bold mb-3">Хотите посетить стройплощадку?</h2>
-            <p className="text-lg text-blue-100 mb-8 max-w-xl mx-auto">
+            <p className="text-lg text-white/80 mb-8 max-w-xl mx-auto">
               Запишитесь на экскурсию и своими глазами убедитесь в качестве строительства
             </p>
-            <button className="bg-white text-[#0066FF] hover:bg-blue-50 px-8 py-4 rounded-2xl font-bold transition-colors shadow-lg">
+            <button className="bg-white text-[#363E62] hover:bg-[#363E62]/10 px-8 py-4 rounded-2xl font-bold transition-colors shadow-lg">
               Записаться на экскурсию
             </button>
           </motion.div>

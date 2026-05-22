@@ -55,7 +55,7 @@ export default function ChatWidget() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white p-5 rounded-full shadow-2xl z-50 group"
+            className="fixed bottom-6 right-6 bg-gradient-to-r from-[#363E62] to-[#232840] text-white p-5 rounded-full shadow-2xl z-50 group"
           >
             <MessageCircle className="w-7 h-7" />
             <div className="absolute top-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white animate-pulse" />
@@ -74,7 +74,7 @@ export default function ChatWidget() {
             className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] bg-white rounded-3xl shadow-2xl z-50 flex flex-col h-[600px] max-h-[calc(100vh-3rem)] overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white p-5 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#363E62] to-[#232840] text-white p-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
@@ -84,7 +84,7 @@ export default function ChatWidget() {
                 </div>
                 <div>
                   <div className="font-bold">Онлайн-консультант</div>
-                  <div className="text-xs text-blue-100">Обычно отвечает за 1 минуту</div>
+                  <div className="text-xs text-white/80">Обычно отвечает за 1 минуту</div>
                 </div>
               </div>
               <button
@@ -96,7 +96,7 @@ export default function ChatWidget() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
+            <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white">
               {messages.map((message) => (
                 <motion.div
                   key={message.id}
@@ -106,15 +106,15 @@ export default function ChatWidget() {
                   className={`flex gap-3 ${message.isBot ? "justify-start" : "justify-end"}`}
                 >
                   {message.isBot && (
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#0066FF] to-[#00D9FF] rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#363E62] to-[#232840] rounded-full flex items-center justify-center flex-shrink-0">
                       <Bot className="w-4 h-4 text-white" />
                     </div>
                   )}
                   <div
                     className={`max-w-[75%] px-4 py-3 rounded-2xl shadow-sm ${
                       message.isBot
-                        ? "bg-white text-gray-900 rounded-tl-none"
-                        : "bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white rounded-tr-none"
+                        ? "bg-white text-[#363E62] rounded-tl-none"
+                        : "bg-gradient-to-r from-[#363E62] to-[#232840] text-white rounded-tr-none"
                     }`}
                   >
                     <p className="text-sm leading-relaxed">{message.text}</p>
@@ -134,7 +134,7 @@ export default function ChatWidget() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex gap-3 justify-start"
                 >
-                  <div className="w-8 h-8 bg-gradient-to-br from-[#0066FF] to-[#00D9FF] rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#363E62] to-[#232840] rounded-full flex items-center justify-center flex-shrink-0">
                     <Bot className="w-4 h-4 text-white" />
                   </div>
                   <div className="bg-white px-5 py-3 rounded-2xl rounded-tl-none shadow-sm">
@@ -171,7 +171,7 @@ export default function ChatWidget() {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && handleSend()}
                   placeholder="Напишите сообщение..."
-                  className="flex-1 px-5 py-3 bg-gray-50 border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#0066FF] focus:bg-white transition-all"
+                  className="flex-1 px-5 py-3 bg-[#f5f5f5] border-2 border-transparent rounded-2xl focus:outline-none focus:border-[#363E62] focus:bg-white transition-all"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -180,7 +180,7 @@ export default function ChatWidget() {
                   disabled={!inputValue.trim()}
                   className={`p-3 rounded-2xl transition-all ${
                     inputValue.trim()
-                      ? "bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white shadow-lg"
+                      ? "bg-gradient-to-r from-[#363E62] to-[#232840] text-white shadow-lg"
                       : "bg-gray-100 text-gray-400"
                   }`}
                 >

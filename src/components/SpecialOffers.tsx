@@ -8,16 +8,16 @@ const offers = [
   {
     id: 1,
     icon: Percent,
-    iconBg: "bg-blue-100",
-    iconColor: "text-[#0066FF]",
+    iconBg: "bg-[#363E62]/15",
+    iconColor: "text-[#363E62]",
     tag: "Ипотека",
-    tagColor: "bg-blue-50 text-[#0066FF]",
+    tagColor: "bg-[#363E62]/10 text-[#363E62]",
     title: "Ипотека от 0.1%",
     subtitle: "от Сбербанка",
     description: "Специальные ставки по семейной ипотеке и льготным программам при покупке квартиры в наших ЖК.",
     deadline: "До 31 марта 2026",
-    gradient: "from-blue-50 to-white",
-    border: "border-blue-100",
+    gradient: "from-[#363E62]/10 to-white",
+    border: "border-[#363E62]/20",
   },
   {
     id: 2,
@@ -63,6 +63,18 @@ const offers = [
   },
 ];
 
+import type { Variants } from "motion/react";
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+};
+
+const gridVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
 export default function SpecialOffers() {
   return (
     <section className="py-24">
@@ -70,10 +82,10 @@ export default function SpecialOffers() {
         <div className="flex items-end justify-between mb-12">
           <div>
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-[#0066FF] rounded-full mb-4 font-medium"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#363E62]/10 text-[#363E62] rounded-full mb-4 font-medium"
             >
               <Tag className="w-4 h-4" />
               Выгодные условия
@@ -81,24 +93,27 @@ export default function SpecialOffers() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-bold text-gray-900"
+              viewport={{ once: true, amount: 0.3 }}
+              className="text-4xl md:text-5xl font-bold text-[#363E62]"
             >
               Спецпредложения
             </motion.h2>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {offers.map((offer, index) => {
+        <motion.div
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {offers.map((offer) => {
             const Icon = offer.icon;
             return (
               <motion.div
                 key={offer.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
+                variants={cardVariants}
                 className={`group bg-gradient-to-b ${offer.gradient} border ${offer.border} rounded-3xl p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
               >
                 <div className="flex items-start justify-between mb-5">
@@ -110,7 +125,7 @@ export default function SpecialOffers() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-1">{offer.title}</h3>
+                <h3 className="text-xl font-bold text-[#363E62] mb-1">{offer.title}</h3>
                 <p className="text-sm text-gray-500 mb-3">{offer.subtitle}</p>
                 <p className="text-sm text-gray-600 leading-relaxed mb-6">{offer.description}</p>
 
@@ -121,7 +136,7 @@ export default function SpecialOffers() {
                   </div>
                   <Link
                     href="/objects"
-                    className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:bg-[#0066FF] transition-colors"
+                    className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm group-hover:bg-[#363E62] transition-colors"
                   >
                     <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
                   </Link>
@@ -129,7 +144,7 @@ export default function SpecialOffers() {
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

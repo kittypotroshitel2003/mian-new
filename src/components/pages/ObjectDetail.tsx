@@ -104,7 +104,7 @@ export default function ObjectDetail() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Объект не найден</h2>
-          <Link href="/objects" className="text-blue-600 hover:underline">
+          <Link href="/objects" className="text-[#363E62] hover:underline">
             Вернуться к списку объектов
           </Link>
         </div>
@@ -129,7 +129,7 @@ export default function ObjectDetail() {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-white min-h-screen">
 
       <PageHeader
         breadcrumbs={[
@@ -145,11 +145,11 @@ export default function ObjectDetail() {
               ? "bg-green-50 text-green-700"
               : object.status === "Старт продаж"
               ? "bg-orange-50 text-orange-700"
-              : "bg-blue-50 text-[#0066FF]"
+              : "bg-[#363E62]/10 text-[#363E62]"
           }`}>
             <span className={`w-1.5 h-1.5 rounded-full ${
               object.status === "Сдан" ? "bg-green-500" :
-              object.status === "Старт продаж" ? "bg-orange-500" : "bg-[#0066FF] animate-pulse"
+              object.status === "Старт продаж" ? "bg-orange-500" : "bg-[#363E62] animate-pulse"
             }`} />
             {object.status} · Срок сдачи: {object.completionDate}
           </span>
@@ -194,18 +194,18 @@ export default function ObjectDetail() {
                 <input
                   type="text"
                   placeholder="Ваше имя"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
                 <input
                   type="tel"
                   placeholder="Телефон"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
                 <input
                   type="date"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl transition-colors">
+                <button className="w-full bg-[#363E62] hover:bg-[#363E62] text-white py-3 rounded-xl transition-colors">
                   Записаться
                 </button>
               </form>
@@ -227,7 +227,7 @@ export default function ObjectDetail() {
           <h2 className="text-3xl font-bold mb-6">Выбор квартир</h2>
 
           {/* Apartment Filters */}
-          <div className="bg-gray-50 rounded-xl p-6 mb-8">
+          <div className="bg-white rounded-xl p-6 mb-8">
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium mb-2">Комнат</label>
@@ -236,7 +236,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, rooms: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 >
                   <option value="all">Все</option>
                   <option value="1-комн">1-комн</option>
@@ -254,7 +254,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, areaFrom: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
               </div>
 
@@ -267,7 +267,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, areaTo: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
               </div>
 
@@ -278,7 +278,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, status: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 >
                   <option value="all">Все</option>
                   <option value="Свободна">Свободна</option>
@@ -297,7 +297,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, priceFrom: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
               </div>
               <div>
@@ -309,7 +309,7 @@ export default function ObjectDetail() {
                   onChange={(e) =>
                     setApartmentFilters({ ...apartmentFilters, priceTo: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]"
                 />
               </div>
             </div>
@@ -339,12 +339,12 @@ export default function ObjectDetail() {
               filteredApartments.map((apt) => (
                 <div
                   key={apt.id}
-                  className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-blue-200 hover:shadow-xl hover:shadow-blue-50 transition-all duration-300"
+                  className="group bg-white border border-gray-100 rounded-2xl overflow-hidden hover:border-[#363E62]/30 hover:shadow-xl hover:shadow-[#363E62]/10 transition-all duration-300"
                 >
                   <div className="flex flex-col sm:flex-row">
 
                     {/* — Apartment image — */}
-                    <div className="relative w-full sm:w-44 md:w-52 flex-shrink-0 h-52 sm:h-auto overflow-hidden bg-gray-50">
+                    <div className="relative w-full sm:w-44 md:w-52 flex-shrink-0 h-52 sm:h-auto overflow-hidden bg-white">
                       <ImageWithFallback
                         src={
                           apt.layout === "Студия"
@@ -362,8 +362,8 @@ export default function ObjectDetail() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       {/* layout badge over image */}
                       <div className="absolute bottom-3 left-3">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white/90 backdrop-blur-sm rounded-lg text-xs font-semibold text-gray-800 shadow-sm">
-                          <Home className="w-3 h-3 text-[#0066FF]" />
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-black/45 backdrop-blur-sm rounded-lg text-xs font-semibold text-white">
+                          <Home className="w-3 h-3 text-white" />
                           {apt.layout}
                         </span>
                       </div>
@@ -376,7 +376,7 @@ export default function ObjectDetail() {
                       <div className="flex items-start justify-between gap-4 mb-5">
                         <div>
                           <div className="flex items-center gap-2.5 flex-wrap">
-                            <span className="font-bold text-gray-900 text-xl">{apt.rooms}</span>
+                            <span className="font-bold text-[#363E62] text-xl">{apt.rooms}</span>
                             <span
                               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
                                 apt.status === "Свободна"
@@ -396,7 +396,7 @@ export default function ObjectDetail() {
                         </div>
                         <div className="text-right flex-shrink-0">
                           <div className="text-xs text-gray-400 mb-0.5 uppercase tracking-wide">Стоимость</div>
-                          <div className="text-2xl font-bold text-[#0066FF]">{formatPrice(apt.price)}</div>
+                          <div className="text-2xl font-bold text-[#363E62]">{formatPrice(apt.price)}</div>
                           <div className="text-xs text-gray-400 mt-0.5">
                             {formatPrice(Math.round(apt.price / apt.area))} за м²
                           </div>
@@ -405,18 +405,18 @@ export default function ObjectDetail() {
 
                       {/* Row 2: spec chips */}
                       <div className="flex flex-wrap gap-2 mb-5">
-                        <div className="flex items-center gap-1.5 bg-gray-50 hover:bg-blue-50 rounded-xl px-3.5 py-2 transition-colors">
-                          <Maximize2 className="w-3.5 h-3.5 text-[#0066FF]" />
+                        <div className="flex items-center gap-1.5 bg-white hover:bg-[#363E62]/10 rounded-xl px-3.5 py-2 transition-colors">
+                          <Maximize2 className="w-3.5 h-3.5 text-[#363E62]" />
                           <span className="text-sm font-medium text-gray-700">{apt.area} м²</span>
                           <span className="text-xs text-gray-400">площадь</span>
                         </div>
-                        <div className="flex items-center gap-1.5 bg-gray-50 hover:bg-blue-50 rounded-xl px-3.5 py-2 transition-colors">
-                          <Layers className="w-3.5 h-3.5 text-[#0066FF]" />
+                        <div className="flex items-center gap-1.5 bg-white hover:bg-[#363E62]/10 rounded-xl px-3.5 py-2 transition-colors">
+                          <Layers className="w-3.5 h-3.5 text-[#363E62]" />
                           <span className="text-sm font-medium text-gray-700">{apt.floor}</span>
                           <span className="text-xs text-gray-400">этаж</span>
                         </div>
-                        <div className="flex items-center gap-1.5 bg-gray-50 hover:bg-blue-50 rounded-xl px-3.5 py-2 transition-colors">
-                          <Building2 className="w-3.5 h-3.5 text-[#0066FF]" />
+                        <div className="flex items-center gap-1.5 bg-white hover:bg-[#363E62]/10 rounded-xl px-3.5 py-2 transition-colors">
+                          <Building2 className="w-3.5 h-3.5 text-[#363E62]" />
                           <span className="text-sm font-medium text-gray-700">Готовность 75%</span>
                         </div>
                       </div>
@@ -425,14 +425,14 @@ export default function ObjectDetail() {
                       <div className="flex items-center justify-between pt-4 mt-auto border-t border-gray-100">
                         <a
                           href="#"
-                          className="text-sm text-[#0066FF] font-medium hover:underline"
+                          className="text-sm text-[#363E62] font-medium hover:underline"
                         >
                           Посмотреть план
                         </a>
                         <button
                           className={`px-6 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                             apt.status === "Свободна"
-                              ? "bg-gradient-to-r from-[#0066FF] to-[#00D9FF] text-white shadow-sm shadow-blue-100 hover:shadow-md hover:shadow-blue-200 hover:scale-[1.02]"
+                              ? "bg-gradient-to-r from-[#363E62] to-[#232840] text-white shadow-sm shadow-[#363E62]/15 hover:shadow-md hover:shadow-[#363E62]/20 hover:opacity-90"
                               : "bg-gray-100 text-gray-400 cursor-not-allowed"
                           }`}
                           disabled={apt.status !== "Свободна"}

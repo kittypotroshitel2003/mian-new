@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "motion/react";
 
 const faqItems = [
   {
@@ -90,7 +91,7 @@ export default function FAQAccordion({ limit, showMoreLink }: FAQAccordionProps 
             >
               <button
                 onClick={() => toggle(item.id)}
-                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-[#f5f5f5] transition-colors"
               >
                 <span className="font-semibold text-left">{item.question}</span>
                 <ChevronDown
@@ -99,11 +100,21 @@ export default function FAQAccordion({ limit, showMoreLink }: FAQAccordionProps 
                   }`}
                 />
               </button>
-              {isOpen && (
-                <div className="px-6 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
-                  {item.answer}
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-4 text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                      {item.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
@@ -116,7 +127,7 @@ export default function FAQAccordion({ limit, showMoreLink }: FAQAccordionProps 
           </p>
           <Link
             href={showMoreLink}
-            className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors group"
+            className="inline-flex items-center gap-2 text-[#363E62] font-semibold hover:text-[#232840] transition-colors group"
           >
             Все вопросы и ответы
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
