@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   description: 'Надежный застройщик качественного жилья с 2010 года. Квартиры от застройщика. Ипотека, рассрочка, онлайн-запись.',
   keywords: ['ООО МИАН', 'застройщик', 'новостройки', 'купить квартиру', 'жилые комплексы', 'ипотека'],
   authors: [{ name: 'ООО МИАН' }],
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
