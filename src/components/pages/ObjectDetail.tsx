@@ -596,15 +596,31 @@ export default function ObjectDetail() {
                 </p>
 
                 {/* Features list */}
-                <h3 className="text-lg font-semibold mb-4 text-[#363E62]">Преимущества</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {object.features.map((feature, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                {!object.specs && (
+                  <>
+                    <h3 className="text-lg font-semibold mb-4 text-[#363E62]">Преимущества</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {object.features.map((feature, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                          <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                          <span className="text-gray-700">{feature}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
+
+                {/* Feature tags (if specs are shown) */}
+                {object.specs && (
+                  <div className="flex flex-wrap gap-2">
+                    {object.features.map((f, i) => (
+                      <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#363E62]/8 text-[#363E62] rounded-full text-sm font-medium">
+                        <CheckCircle className="w-3.5 h-3.5" />
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
               </div>
             </motion.div>
