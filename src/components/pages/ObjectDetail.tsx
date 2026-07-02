@@ -259,7 +259,7 @@ function AnimatedStat({ stat }: { stat: HeroStat }) {
 
 function BookingForm() {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+    <div className="bg-white rounded-2xl shadow-lg p-6">
       <h3 className="text-xl font-semibold mb-4 text-[#363E62]">Записаться на экскурсию</h3>
       <form className="space-y-3">
         <input
@@ -577,66 +577,51 @@ export default function ObjectDetail() {
       <div className={`container mx-auto px-4 ${hasHero ? "pt-8 sm:pt-10" : "pt-8"}`}>
 
         {/* ─── О КОМПЛЕКСЕ ─── */}
-        <div id="about-section" className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-          {/* Left: description */}
-          <div className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
-            >
-              <div className="p-6 sm:p-8 border-b border-gray-100">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#363E62]">О комплексе</h2>
-              </div>
+        <div id="about-section" className="mb-12 sm:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+          >
+            <div className="p-6 sm:p-8 border-b border-gray-100">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#363E62]">О комплексе</h2>
+            </div>
 
-              <div className="p-6 sm:p-8">
-                <p className="text-gray-600 leading-relaxed text-base mb-6">
-                  {object.aboutText || object.description}
-                </p>
+            <div className="p-6 sm:p-8">
+              <p className="text-gray-600 leading-relaxed text-base mb-6">
+                {object.aboutText || object.description}
+              </p>
 
-                {/* Features list */}
-                {!object.specs && (
-                  <>
-                    <h3 className="text-lg font-semibold mb-4 text-[#363E62]">Преимущества</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {object.features.map((feature, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                          <span className="text-gray-700">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-
-                {/* Feature tags (if specs are shown) */}
-                {object.specs && (
-                  <div className="flex flex-wrap gap-2">
-                    {object.features.map((f, i) => (
-                      <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#363E62]/8 text-[#363E62] rounded-full text-sm font-medium">
-                        <CheckCircle className="w-3.5 h-3.5" />
-                        {f}
-                      </span>
+              {/* Features list */}
+              {!object.specs && (
+                <>
+                  <h3 className="text-lg font-semibold mb-4 text-[#363E62]">Преимущества</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {object.features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </div>
                     ))}
                   </div>
-                )}
+                </>
+              )}
 
-              </div>
-            </motion.div>
-          </div>
+              {/* Feature tags (if specs are shown) */}
+              {object.specs && (
+                <div className="flex flex-wrap gap-2">
+                  {object.features.map((f, i) => (
+                    <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#363E62]/8 text-[#363E62] rounded-full text-sm font-medium">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              )}
 
-          {/* Right: form */}
-          <div className="lg:col-span-1" id="booking-form">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-            >
-              <BookingForm />
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* ─── МАРКЕТИНГОВЫЕ КАРТОЧКИ ─── */}
@@ -875,6 +860,17 @@ export default function ObjectDetail() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* ─── ЗАПИСЬ НА ЭКСКУРСИЮ ─── */}
+        <div id="booking-form" className="max-w-xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <BookingForm />
+          </motion.div>
         </div>
       </div>
     </div>
