@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import {
   Maximize2, Layers, Home, Phone, ArrowRight, ChevronDown, ChevronUp,
   ShieldCheck, CreditCard, Building2, TreePine, Car, Sparkles, Key,
-  CheckCircle, Sun, LayoutGrid, X
+  CheckCircle, Sun, LayoutGrid, X, MessageSquare
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { PageHeader } from "../PageHeader";
@@ -257,47 +257,122 @@ function AnimatedStat({ stat }: { stat: HeroStat }) {
   );
 }
 
-function BookingForm() {
+function BookingForm({ objectName, objectImage }: { objectName: string; objectImage: string }) {
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
-      <h3 className="text-xl font-semibold mb-4 text-[#363E62]">Записаться на экскурсию</h3>
-      <form className="space-y-3">
-        <input
-          type="text"
-          placeholder="Ваше имя"
-          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]/30 focus:border-[#363E62] transition-all"
-        />
-        <input
-          type="tel"
-          placeholder="Телефон"
-          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]/30 focus:border-[#363E62] transition-all"
-        />
-        <input
-          type="date"
-          defaultValue={new Date().toISOString().split("T")[0]}
-          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#363E62]/30 focus:border-[#363E62] transition-all text-gray-600"
-        />
-        <div className="flex items-start gap-2 pt-1">
-          <input type="checkbox" id="privacy" className="mt-1 w-4 h-4 accent-[#363E62] cursor-pointer flex-shrink-0" />
-          <label htmlFor="privacy" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
-            Я согласен(а) с{" "}
-            <Link href="/privacy" className="text-[#363E62] hover:underline">политикой конфиденциальности</Link>
-          </label>
+    <div className="rounded-[2rem] overflow-hidden shadow-2xl grid grid-cols-1 lg:grid-cols-2 min-h-[560px]">
+      {/* LEFT — Visual panel */}
+      <div className="relative flex flex-col justify-between p-8 md:p-10 overflow-hidden bg-[#080f1f]">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <ImageWithFallback
+            src={objectImage}
+            alt={objectName}
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#363E62]/40 via-transparent to-[#080f1f]/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#080f1f] via-transparent to-transparent" />
         </div>
-        <button
-          type="submit"
-          className="w-full bg-gradient-to-r from-[#363E62] to-[#232840] hover:opacity-90 text-white py-3 rounded-xl font-semibold transition-all shadow-md shadow-[#363E62]/15"
-        >
-          Записаться
-        </button>
-      </form>
-      <div className="mt-4 pt-4 border-t border-gray-100">
-        <Link
-          href="/mortgage"
-          className="block w-full bg-gray-50 hover:bg-gray-100 text-center py-3 rounded-xl text-sm font-medium text-gray-600 transition-colors"
-        >
-          Рассчитать ипотеку
-        </Link>
+
+        {/* Decorative circle glow */}
+        <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#363E62]/20 rounded-full blur-3xl" />
+        <div className="absolute -bottom-16 -right-16 w-56 h-56 bg-[#363E62]/10 rounded-full blur-3xl" />
+
+        {/* TOP: badge + title */}
+        <div className="relative z-10">
+          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/15 px-4 py-2 rounded-full mb-6">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-white/80 text-sm font-medium">Онлайн — отвечаем прямо сейчас</span>
+          </div>
+
+          <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-4">
+            Запишитесь<br />на экскурсию
+          </h3>
+          <p className="text-white/60 text-base leading-relaxed max-w-sm">
+            Покажем квартиры «{objectName}» вживую, ответим на вопросы и подберём удобное время визита
+          </p>
+        </div>
+
+        {/* BOTTOM: manager card */}
+        <div className="relative z-10 flex items-stretch gap-4 bg-white/8 backdrop-blur-sm border border-white/10 rounded-2xl p-5 mt-8">
+          <div className="relative flex-shrink-0 self-start">
+            <ImageWithFallback
+              src="https://images.unsplash.com/photo-1770199105692-9e52ff137cad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjByZWFsJTIwZXN0YXRlJTIwYWdlbnQlMjB3b21hbiUyMHNtaWxpbmd8ZW58MXx8fHwxNzcyNjI5MzEyfDA&ixlib=rb-4.1.0&q=80&w=1080"
+              alt="Менеджер МИАН"
+              className="w-14 h-14 rounded-xl object-cover"
+            />
+            <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-400 rounded-full border-2 border-[#080f1f]" />
+          </div>
+          <div className="flex-1 min-w-0 flex flex-col justify-between">
+            <div>
+              <p className="text-white font-bold text-sm leading-tight">Анна Соколова</p>
+              <p className="text-white/60 text-xs mt-1 leading-snug">Старший менеджер · 7 лет опыта</p>
+            </div>
+            <div className="flex gap-2 mt-3">
+              <a href="tel:+74951234567" className="flex-1 h-9 bg-[#363E62] hover:bg-[#232840] rounded-xl flex items-center justify-center transition-colors">
+                <Phone className="w-4 h-4 text-white" />
+              </a>
+              <a href="#" className="flex-1 h-9 bg-white/10 hover:bg-white/20 rounded-xl flex items-center justify-center transition-colors">
+                <MessageSquare className="w-4 h-4 text-white" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT — Form panel */}
+      <div className="bg-white flex flex-col justify-center p-8 md:p-10">
+        <p className="text-[#363E62] font-semibold mb-2 text-sm tracking-wide uppercase">Запись на экскурсию</p>
+        <h4 className="text-2xl font-bold text-[#363E62] leading-snug mb-6">
+          Выберите удобное<br />для визита время
+        </h4>
+
+        <form className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              type="text"
+              placeholder="Ваше имя"
+              className="w-full px-5 py-4 bg-[#f5f5f5] rounded-2xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-400"
+            />
+            <input
+              type="tel"
+              placeholder="Телефон"
+              className="w-full px-5 py-4 bg-[#f5f5f5] rounded-2xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all placeholder:text-gray-400"
+            />
+          </div>
+          <input
+            type="date"
+            defaultValue={new Date().toISOString().split("T")[0]}
+            className="w-full px-5 py-4 bg-[#f5f5f5] rounded-2xl border-2 border-transparent focus:border-[#363E62] focus:bg-white focus:outline-none transition-all text-gray-600"
+          />
+          <div className="flex items-start gap-2 pt-1">
+            <input type="checkbox" id="privacy" className="mt-1 w-4 h-4 accent-[#363E62] cursor-pointer flex-shrink-0" />
+            <label htmlFor="privacy" className="text-xs text-gray-400 leading-relaxed cursor-pointer">
+              Я согласен(а) с{" "}
+              <Link href="/privacy" className="text-[#363E62] hover:underline">политикой конфиденциальности</Link>
+            </label>
+          </div>
+          <button
+            type="submit"
+            className="w-full relative overflow-hidden bg-gradient-to-r from-[#363E62] to-[#232840] text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-[#363E62]/20 hover:shadow-[#363E62]/30 hover:opacity-90 transition-all flex items-center justify-center gap-3 group"
+          >
+            <span>Записаться</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </form>
+
+        <div className="mt-4 pt-4 border-t border-gray-100">
+          <Link
+            href="/mortgage"
+            className="block w-full bg-gray-50 hover:bg-gray-100 text-center py-3 rounded-xl text-sm font-medium text-gray-600 transition-colors"
+          >
+            Рассчитать ипотеку
+          </Link>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 pt-4">
+          <ShieldCheck className="w-3.5 h-3.5 text-[#363E62]" />
+          <span className="text-xs text-gray-400">Данные защищены согласно 152-ФЗ</span>
+        </div>
       </div>
     </div>
   );
@@ -869,7 +944,7 @@ export default function ObjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <BookingForm />
+            <BookingForm objectName={object.name} objectImage={object.image} />
           </motion.div>
         </div>
       </div>
