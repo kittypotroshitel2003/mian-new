@@ -68,13 +68,13 @@ const featuredObjects = [
   },
   {
     id: 2,
-    name: "ЖК Южный Парк",
-    location: "ЮЗАО",
+    name: "ЖК Центральный Двор",
+    location: "просп. В.И. Ленина, 31",
     status: "Старт продаж",
-    priceFrom: "от 6 200 000 ₽",
+    priceFrom: "от 3 700 000 ₽",
     completionDate: "2 кв. 2027",
     image: "https://images.unsplash.com/photo-1762838039677-d8dcb61ad942?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjByZXNpZGVudGlhbCUyMGNvbXBsZXh8ZW58MXx8fHwxNzcxMjM1MzA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-    apartments: 156,
+    apartments: 437,
   },
   {
     id: 3,
