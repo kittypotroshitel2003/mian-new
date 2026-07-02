@@ -63,6 +63,17 @@
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #232840 0%, #1a1f35 100%);
   }
+
+  /* Hide the styled scrollbar on mobile — native indicators are enough there */
+  @media (max-width: 767px) {
+    * {
+      scrollbar-width: none;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 /* Selection color */
