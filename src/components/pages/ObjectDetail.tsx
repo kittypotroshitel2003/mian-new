@@ -463,21 +463,6 @@ export default function ObjectDetail() {
         ]}
         title={object.name}
         subtitle={object.location}
-        badge={
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-semibold ${
-            object.status === "Сдан"
-              ? "bg-green-50 text-green-700"
-              : object.status === "Старт продаж"
-              ? "bg-orange-50 text-orange-700"
-              : "bg-[#363E62]/10 text-[#363E62]"
-          }`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${
-              object.status === "Сдан" ? "bg-green-500" :
-              object.status === "Старт продаж" ? "bg-orange-500" : "bg-[#363E62] animate-pulse"
-            }`} />
-            {object.status} · Срок сдачи: {object.completionDate}
-          </span>
-        }
       />
 
       {/* ─── HERO BANNER ─── */}
