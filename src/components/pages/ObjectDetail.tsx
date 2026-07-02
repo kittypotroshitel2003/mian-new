@@ -635,7 +635,7 @@ export default function ObjectDetail() {
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#363E62]">Почему «Центральный Двор»</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
               {object.marketingCards.map((card, i) => {
                 const Icon = ICON_MAP[card.icon];
                 return (
@@ -645,7 +645,7 @@ export default function ObjectDetail() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.05 }}
-                    className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#363E62]/20 transition-all duration-300"
+                    className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#363E62]/20 transition-all duration-300 shrink-0 w-[78%] snap-start sm:w-auto sm:shrink"
                   >
                     <div className="w-11 h-11 bg-[#363E62]/8 group-hover:bg-[#363E62]/15 rounded-xl flex items-center justify-center mb-4 transition-colors">
                       <Icon className="w-5 h-5 text-[#363E62]" />
@@ -863,7 +863,7 @@ export default function ObjectDetail() {
         </div>
 
         {/* ─── ЗАПИСЬ НА ЭКСКУРСИЮ ─── */}
-        <div id="booking-form" className="max-w-xl mx-auto mb-16">
+        <div id="booking-form" className="mb-16">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
