@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { PageHeader } from "../PageHeader";
+import ObjectLocationMap from "../ObjectLocationMap";
 
 const ICON_MAP = {
   car: Car,
@@ -37,6 +38,7 @@ interface MarketingCard {
   utp: string;
   text: string;
   icon: IconKey;
+  image: string;
 }
 
 interface HeroStat {
@@ -80,6 +82,7 @@ interface ObjectInfo {
   gallery?: string[];
   features: string[];
   apartments: Apartment[];
+  coordinates?: { lat: number; lng: number };
 }
 
 const sharedApartments: Apartment[] = [
@@ -164,41 +167,48 @@ const objectData: Record<number, ObjectInfo> = {
         utp: "Стильные фасады и большие окна",
         text: "Современный дом с новыми технологиями.",
         icon: "building",
+        image: "https://images.unsplash.com/photo-1559329146-807aff9ff1fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
       {
         category: "Интерьеры",
         utp: "Пространство без лишних метров",
         text: "Продуманные планировки для жизни.",
         icon: "grid",
+        image: "https://images.unsplash.com/photo-1594873604892-b599f847e859?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
       {
         category: "Двор",
         utp: "Двор без машин",
         text: "Безопасное пространство для семьи.",
         icon: "tree",
+        image: "https://images.unsplash.com/photo-1594295800284-990f74bb6928?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
       {
         category: "Каждый день",
         utp: "Всё рядом для удобной жизни",
         text: "Парк рядом для прогулок и пробежек.",
         icon: "sun",
+        image: "https://images.unsplash.com/photo-1769184618473-58c1f0e294f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
       {
         category: "Квартиры с ремонтом",
         utp: "Можно заехать быстрее",
         text: "Готовый вариант для быстрого переезда.",
         icon: "key",
+        image: "https://images.unsplash.com/photo-1561518065-8b3befac609d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
       {
         category: "Парк за окном",
         utp: "57 га рядом",
         text: "Зелёная среда рядом с домом.",
         icon: "sparkles",
+        image: "https://images.unsplash.com/photo-1663851360815-784f3ba447f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
       },
     ],
     gallery: galleryImages,
     features: ["Закрытая территория", "Двор без машин", "Детские площадки", "Видеонаблюдение 24/7", "Гибкая оплата", "Ипотека от 3,5%"],
     apartments: sharedApartments,
+    coordinates: { lat: 44.883901, lng: 39.194597 },
   },
 };
 
@@ -711,26 +721,28 @@ export default function ObjectDetail() {
               <h2 className="text-2xl sm:text-3xl font-bold text-[#363E62]">Почему «Центральный Двор»</h2>
             </div>
             <div className="flex overflow-x-auto overflow-y-hidden touch-pan-x overscroll-x-contain snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
-              {object.marketingCards.map((card, i) => {
-                const Icon = ICON_MAP[card.icon];
-                return (
-                  <motion.div
-                    key={card.category}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="group bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg hover:border-[#363E62]/20 transition-all duration-300 shrink-0 w-[78%] snap-start sm:w-auto sm:shrink"
-                  >
-                    <div className="w-11 h-11 bg-[#363E62]/8 group-hover:bg-[#363E62]/15 rounded-xl flex items-center justify-center mb-4 transition-colors">
-                      <Icon className="w-5 h-5 text-[#363E62]" />
-                    </div>
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">{card.category}</p>
-                    <h3 className="text-base font-bold text-[#363E62] mb-2 leading-snug">{card.utp}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{card.text}</p>
-                  </motion.div>
-                );
-              })}
+              {object.marketingCards.map((card, i) => (
+                <motion.div
+                  key={card.category}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 shrink-0 w-[78%] snap-start sm:w-auto sm:shrink min-h-[220px] flex flex-col justify-end p-6"
+                >
+                  <ImageWithFallback
+                    src={card.image}
+                    alt={card.utp}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/0" />
+                  <div className="relative z-10">
+                    <p className="text-xs font-semibold text-white/70 uppercase tracking-wide mb-2">{card.category}</p>
+                    <h3 className="text-base font-bold text-white mb-2 leading-snug">{card.utp}</h3>
+                    <p className="text-sm text-white/80 leading-relaxed">{card.text}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.section>
         )}
@@ -743,6 +755,24 @@ export default function ObjectDetail() {
             viewport={{ once: true }}
           >
             <Gallery images={object.gallery} />
+          </motion.div>
+        )}
+
+        {/* ─── КАРТА ─── */}
+        {object.coordinates && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold mb-5 sm:mb-6 text-[#363E62]">Расположение на карте</h2>
+            <ObjectLocationMap
+              lat={object.coordinates.lat}
+              lng={object.coordinates.lng}
+              name={object.name}
+              address={object.location}
+            />
           </motion.div>
         )}
 
