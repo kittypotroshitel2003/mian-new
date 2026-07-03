@@ -720,7 +720,8 @@ export default function ObjectDetail() {
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-[#363E62]">Почему «Центральный Двор»</h2>
             </div>
-            <div className="flex overflow-x-auto overflow-y-hidden touch-pan-x overscroll-x-contain snap-x snap-mandatory gap-4 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
+            <div className="flex overflow-x-auto overflow-y-hidden touch-pan-x overscroll-x-contain snap-x snap-mandatory gap-4 pb-2 -mx-4 sm:mx-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
+              <div className="w-4 shrink-0 sm:hidden" aria-hidden="true" />
               {object.marketingCards.map((card, i) => (
                 <motion.div
                   key={card.category}
@@ -743,6 +744,7 @@ export default function ObjectDetail() {
                   </div>
                 </motion.div>
               ))}
+              <div className="w-4 shrink-0 sm:hidden" aria-hidden="true" />
             </div>
           </motion.section>
         )}
