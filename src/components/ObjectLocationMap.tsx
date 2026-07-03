@@ -23,9 +23,11 @@ export default function ObjectLocationMap({ lat, lng, name, address }: ObjectLoc
       const map = L.map(mapRef.current, {
         center: [lat, lng],
         zoom: 15,
-        zoomControl: true,
+        zoomControl: false,
         attributionControl: false,
       });
+
+      L.control.zoom({ position: "topright" }).addTo(map);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
